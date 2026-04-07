@@ -1,6 +1,25 @@
-# Lueur — Quelque chose à se dire
+# Lueur — Quelque something à se dire
 
-Application romantique de questions pour couple. PWA mobile-first.
+Application PWA romantique pour couples. Design moderne, premium, mobile-first, conforme GitHub Pages.
+
+## ✨ V2 Redesign
+
+**Améliorations majeures:**
+- Navigation corrigée (bouton retour fiable, state sync)
+- Design system repensé: couleurs chaudes & premiums, shadows élevées, transitions fluides
+- UX mobile optimisée: safe areas, touch targets (44-50px), feedback visuels clairs
+- Composants unifiés: boutons, cartes, navigation cohérents partout
+- PWA robustifiée: cache v3, network-first pour document, fallback offline
+- Cohérence visuelle garantie d'un écran à l'autre
+
+## Fonctionnalités
+
+- Questions romantiques organisées par 7 modes (Ice Breaker, Tu préfères, Souvenirs, etc.)
+- Dark mode automatique
+- Favoris & Streak tracker
+- Mode hors ligne complet
+- Installation PWA (iPhone/Android)
+- Design doux, elegant, sans kitsch
 
 ## Lancer localement
 
@@ -33,19 +52,19 @@ npx serve .
 ## Icônes
 
 Remplacez `icon-192.png` et `icon-512.png` par vos vraies icônes
-(fond terracotta #C4714A, flamme blanche centrée).
+(fond crème #FEFCF8, accent rose pâle #E8B4A5, flamme douce centrée).
 Des outils comme realfavicongenerator.net permettent de les générer.
 
 ## Structure
 
 ```
 lueur/
-├── index.html      ← app complète (HTML + CSS + JS)
-├── manifest.json   ← config PWA
-├── sw.js           ← service worker (offline)
+├── index.html      ← app complète (HTML + CSS + JS, design simplifié)
+├── manifest.json   ← config PWA (couleurs mises à jour)
+├── sw.js           ← service worker (cache amélioré)
 ├── icon-192.png    ← icône à créer
 ├── icon-512.png    ← icône à créer
-└── README.md
+└── README.md       ← documentation mise à jour
 ```
 
 ## Personnalisation
