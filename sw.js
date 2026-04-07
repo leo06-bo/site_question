@@ -1,8 +1,10 @@
-const CACHE = 'lueur-v1';
+const CACHE = 'lueur-v3';
 const ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
   'https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600&display=swap'
 ];
 
