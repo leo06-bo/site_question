@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FAF7F2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#1A1714" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Lueur">
+<meta name="description" content="Quelque chose à se dire.">
+<link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Lueur — Quelque chose à se dire</title>
+<style>
+:root {
+  --bg: #FAF7F2;
+  --bg2: #F3EDE5;
+  --bg3: #EDE5DA;
+  --card: #FFFFFF;
+  --text: #1C1410;
+  --text2: #6B5A4E;
+  --text3: #A08878;
+  --accent: #C4714A;
+  --accent2: #E8A598;
+  --accent3: #D4956A;
+  --border: rgba(100,70,50,0.12);
+  --border2: rgba(100,70,50,0.22);
+  --radius-sm: 12px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --nav-h: 72px;
+  --shadow: 0 2px 20px rgba(100,60,30,0.10);
+  --shadow-lg: 0 8px 40px rgba(100,60,30,0.15);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1A1714;
+    --bg2: #221E1A;
+    --bg3: #2C2520;
+    --card: #2A2420;
+    --text: #F5EDE4;
+    --text2: #C4A990;
+    --text3: #8C7060;
+    --accent: #D4956A;
+    --accent2: #C47E7E;
+    --accent3: #E8A598;
+    --border: rgba(255,220,180,0.10);
+    --border2: rgba(255,220,180,0.20);
+    --shadow: 0 2px 20px rgba(0,0,0,0.35);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.45);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{font-size:16px;-webkit-text-size-adjust:100%}
+body{
+  font-family:'Inter',system-ui,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100dvh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+a{color:inherit;text-decoration:none}
+img{display:block}
+
+/* ═══════════════════════════════════
+   LAYOUT
+═══════════════════════════════════ */
+#app{
+  max-width:480px;
+  margin:0 auto;
+  min-height:100dvh;
+  display:flex;
+  flex-direction:column;
+  position:relative;
+}
+.screen{
+  display:none;
+  flex:1;
+  flex-direction:column;
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom));
+  padding-top:calc(var(--safe-top) + 0px);
+  min-height:100dvh;
+  animation:fadeIn .25s ease;
+}
+.screen.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ═══════════════════════════════════
+   BOTTOM NAV
+═══════════════════════════════════ */
+.nav{
+  position:fixed;
+  bottom:0;left:0;right:0;
+  max-width:480px;
+  margin:0 auto;
+  height:calc(var(--nav-h) + var(--safe-bottom));
+  padding-bottom:var(--safe-bottom);
+  background:var(--bg);
+  border-top:1px solid var(--border);
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-around;
+  padding-top:8px;
+  z-index:100;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.nav-btn{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  padding:8px 16px;border-radius:var(--radius-sm);
+  transition:all .2s ease;
+  color:var(--text3);
+  min-width:44px;min-height:44px;
+  position:relative;
+}
+.nav-btn.active{color:var(--accent)}
+.nav-btn:active{transform:scale(.95)}
+.nav-btn svg{width:22px;height:22px;stroke-width:1.8;fill:none;stroke:currentColor}
+.nav-btn span{font-size:10px;font-weight:500;letter-spacing:.3px}
+.nav-btn::after{
+  content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:0;height:2px;background:var(--accent);border-radius:2px;
+  transition:width .2s ease;
+}
+.nav-btn.active::after{width:28px}
+
+/* ═══════════════════════════════════
+   HEADER
+═══════════════════════════════════ */
+.screen-header{
+  padding:20px 24px 0;
+  flex-shrink:0;
+}
+.screen-title{
+  font-family:'Fraunces',serif;
+  font-size:28px;font-weight:300;
+  color:var(--text);
+  line-height:1.2;
+}
+.screen-sub{
+  font-size:14px;color:var(--text3);margin-top:4px;font-weight:400;
+}
+
+/* ═══════════════════════════════════
+   HOME SCREEN
+═══════════════════════════════════ */
+#screen-home{
+  padding-bottom:calc(var(--nav-h) + var(--safe-bottom));
+}
+.home-top{
+  padding:calc(var(--safe-top) + 28px) 24px 0;
+  flex-shrink:0;
+}
+.home-logo{
+  display:flex;align-items:center;gap:10px;
+  margin-bottom:4px;
+}
+.home-logo svg{width:32px;height:32px}
+.home-logo-name{
+  font-family:'Fraunces',serif;
+  font-size:22px;font-weight:300;
+  letter-spacing:-.3px;
+  color:var(--text);
+}
+.home-greeting{
+  font-size:14px;color:var(--text3);
+}
+.qotd-card{
+  margin:20px 24px 0;
+  background:var(--accent);
+  border-radius:var(--radius-lg);
+  padding:22px;
+  position:relative;
+  overflow:hidden;
+  cursor:pointer;
+  transition:transform .2s ease, box-shadow .2s ease;
+  box-shadow:var(--shadow);
+}
+.qotd-card:active{transform:scale(.98)}
+.qotd-badge{
+  font-size:11px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;
+  color:rgba(255,255,255,.75);margin-bottom:10px;
+}
+.qotd-q{
+  font-family:'Fraunces',serif;
+  font-size:20px;font-weight:300;font-style:italic;
+  color:#fff;line-height:1.4;
+}
+.qotd-cta{
+  margin-top:14px;
+  font-size:13px;color:rgba(255,255,255,.75);
+  display:flex;align-items:center;gap:6px;
+}
+.qotd-bg{
+  position:absolute;right:-20px;bottom:-20px;
+  width:120px;height:120px;
+  background:rgba(255,255,255,.08);
+  border-radius:50%;
+}
+.section-title{
+  font-size:13px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--text3);padding:20px 24px 10px;
+}
+.modes-grid{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;padding:0 24px;
+}
+.mode-card{
+  background:var(--bg2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:16px 14px;
+  cursor:pointer;
+  transition:all .2s ease;
+  display:flex;flex-direction:column;gap:6px;
+  min-height:90px;
+}
+.mode-card:active{transform:scale(.97);background:var(--bg3)}
+.mode-icon{font-size:20px;line-height:1}
+.mode-name{font-size:14px;font-weight:500;color:var(--text)}
+.mode-desc{font-size:12px;color:var(--text3);line-height:1.4}
+.streak-bar{
+  margin:16px 24px 0;
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.streak-icon{font-size:22px}
+.streak-text{flex:1}
+.streak-count{font-size:15px;font-weight:600;color:var(--text)}
+.streak-label{font-size:12px;color:var(--text3)}
+
+/* ═══════════════════════════════════
+   PLAY SCREEN
+═══════════════════════════════════ */
+#screen-play{
+  display:none;flex-direction:column;
+  min-height:100dvh;
+  padding-bottom:calc(24px + var(--safe-bottom));
+}
+#screen-play.active{display:flex}
+.play-header{
+  padding:calc(var(--safe-top) + 16px) 20px 0;
+  display:flex;align-items:center;gap:12px;flex-shrink:0;
+}
+.play-back{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s ease;
+}
+.play-back:active{transform:scale(.95)}
+.play-back svg{width:18px;height:18px;stroke:var(--text2);fill:none;stroke-width:2}
+.play-mode-info{flex:1}
+.play-mode-name{font-size:15px;font-weight:500;color:var(--text)}
+.play-progress-text{font-size:12px;color:var(--text3);margin-top:1px}
+.play-fav-btn{
+  width:40px;height:40px;border-radius:50%;
+  background:var(--bg2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  transition:all .2s ease;
+}
+.play-fav-btn:active{transform:scale(.95)}
+.play-fav-btn svg{width:20px;height:20px;fill:none;stroke:var(--text3);stroke-width:1.8;transition:all .2s ease}
+.play-fav-btn.active svg{fill:var(--accent);stroke:var(--accent)}
+.progress-bar-wrap{
+  padding:12px 20px 0;flex-shrink:0;
+}
+.progress-bar{
+  height:3px;background:var(--bg3);border-radius:2px;overflow:hidden;
+}
+.progress-bar-fill{
+  height:100%;background:var(--accent);border-radius:2px;
+  transition:width .4s ease;
+}
+.card-area{
+  flex:1;display:flex;flex-direction:column;
+  justify-content:center;padding:24px 20px;
+  perspective:1000px;
+}
+.question-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:36px 28px;
+  box-shadow:var(--shadow-lg);
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .35s ease;
+  min-height:220px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.question-card.flip{
+  animation:cardFlip .35s ease;
+}
+@keyframes cardFlip{
+  0%{transform:rotateY(0)}
+  50%{transform:rotateY(90deg);opacity:0}
+  51%{opacity:0}
+  100%{transform:rotateY(0);opacity:1}
+}
+.q-mode-badge{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:11px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+  color:var(--accent);margin-bottom:16px;
+}
+.q-text{
+  font-family:'Fraunces',serif;
+  font-size:24px;font-weight:300;
+  line-height:1.45;color:var(--text);
+}
+.q-intensity{
+  margin-top:16px;
+  display:flex;gap:4px;
+}
+.q-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:var(--border2);
+}
+.q-dot.on{background:var(--accent)}
+.play-actions{
+  padding:0 20px;flex-shrink:0;
+  display:flex;flex-direction:column;gap:10px;
+}
+.btn-next{
+  background:var(--accent);color:#fff;
+  border-radius:var(--radius-lg);
+  padding:17px;font-size:16px;font-weight:500;
+  transition:all .2s ease;width:100%;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-next:active{transform:scale(.98);opacity:.9}
+.play-row{
+  display:flex;gap:10px;
+}
+.btn-secondary{
+  flex:1;background:var(--bg2);
+  border:1px solid var(--border2);
+  border-radius:var(--radius-md);
+  padding:14px;font-size:14px;font-weight:500;
+  color:var(--text2);
+  transition:all .2s ease;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-secondary:active{transform:scale(.97);background:var(--bg3)}
+.btn-secondary svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2}
+
+/* ═══════════════════════════════════
+   MODE SELECTION
+═══════════════════════════════════ */
+#screen-modes{
+  overflow-y:auto;
+}
+.modes-list{
+  padding:16px 24px;
+  display:flex;flex-direction:column;gap:10px;
+}
+.mode-item{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:18px;cursor:pointer;
+  transition:all .2s ease;
+  display:flex;align-items:center;gap:14px;
+}
+.mode-item:active{transform:scale(.98);background:var(--bg3)}
+.mode-item-icon{
+  width:44px;height:44px;border-radius:var(--radius-sm);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.mode-item-text{flex:1}
+.mode-item-name{font-size:15px;font-weight:500;color:var(--text)}
+.mode-item-desc{font-size:13px;color:var(--text3);margin-top:2px;line-height:1.4}
+.mode-item-count{font-size:12px;color:var(--text3);flex-shrink:0}
+.mode-item-chevron{
+  width:18px;height:18px;stroke:var(--text3);fill:none;stroke-width:2;flex-shrink:0;
+}
+.session-picker{
+  padding:16px 24px;
+}
+.session-title{font-size:13px;font-weight:600;color:var(--text3);letter-spacing:.4px;text-transform:uppercase;margin-bottom:10px}
+.session-row{
+  display:flex;gap:8px;
+}
+.session-btn{
+  flex:1;border:1.5px solid var(--border2);border-radius:var(--radius-md);
+  padding:12px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;transition:all .2s ease;background:var(--bg2);
+}
+.session-btn.selected{border-color:var(--accent);background:rgba(196,113,74,.08)}
+.session-btn:active{transform:scale(.97)}
+.session-num{font-size:18px;font-weight:600;color:var(--text)}
+.session-lbl{font-size:11px;color:var(--text3)}
+
+/* ═══════════════════════════════════
+   FAVORITES
+═══════════════════════════════════ */
+#screen-favs .favs-list{
+  padding:16px 24px;
+  display:flex;flex-direction:column;gap:10px;
+  overflow-y:auto;
+}
+.fav-item{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:16px;
+  display:flex;align-items:flex-start;gap:12px;
+}
+.fav-icon{font-size:16px;margin-top:2px}
+.fav-text{flex:1;font-family:'Fraunces',serif;font-size:16px;font-weight:300;color:var(--text);line-height:1.45}
+.fav-mode{font-size:11px;color:var(--text3);margin-top:4px}
+.fav-del{
+  width:32px;height:32px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:none;flex-shrink:0;
+  transition:all .2s ease;
+}
+.fav-del:active{background:var(--bg3)}
+.fav-del svg{width:16px;height:16px;stroke:var(--text3);fill:none;stroke-width:2}
+.empty-state{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px 24px;gap:10px;text-align:center;
+}
+.empty-icon{font-size:40px;opacity:.5}
+.empty-title{font-family:'Fraunces',serif;font-size:20px;font-weight:300;color:var(--text2)}
+.empty-sub{font-size:14px;color:var(--text3);line-height:1.5}
+
+/* ═══════════════════════════════════
+   SETTINGS / PROFIL
+═══════════════════════════════════ */
+#screen-settings .settings-body{
+  padding:16px 24px;
+  display:flex;flex-direction:column;gap:10px;
+  overflow-y:auto;
+}
+.settings-section-title{
+  font-size:12px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;
+  padding:8px 0 4px;
+}
+.settings-item{
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:var(--radius-md);padding:14px 16px;
+  display:flex;align-items:center;gap:12px;
+}
+.settings-item-text{flex:1}
+.settings-item-label{font-size:15px;font-weight:500;color:var(--text)}
+.settings-item-sub{font-size:12px;color:var(--text3);margin-top:2px}
+.settings-input{
+  background:transparent;border:none;outline:none;
+  font-family:'Inter',sans-serif;font-size:14px;color:var(--text);
+  text-align:right;width:90px;
+}
+.settings-input::placeholder{color:var(--text3)}
+.toggle{
+  width:44px;height:26px;border-radius:13px;
+  background:var(--border2);cursor:pointer;
+  position:relative;transition:background .2s ease;flex-shrink:0;
+}
+.toggle.on{background:var(--accent)}
+.toggle::after{
+  content:'';position:absolute;
+  width:20px;height:20px;border-radius:50%;
+  background:#fff;top:3px;left:3px;
+  transition:transform .2s ease;
+  box-shadow:0 1px 3px rgba(0,0,0,.2);
+}
+.toggle.on::after{transform:translateX(18px)}
+
+/* ═══════════════════════════════════
+   END OF SESSION
+═══════════════════════════════════ */
+.end-screen{
+  display:none;
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:200;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 32px;
+  animation:fadeIn .3s ease;
+}
+.end-screen.active{display:flex}
+.end-emoji{font-size:56px;margin-bottom:24px;animation:pop .4s .1s both}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.end-title{
+  font-family:'Fraunces',serif;
+  font-size:28px;font-weight:300;
+  color:var(--text);margin-bottom:8px;line-height:1.3;
+}
+.end-sub{font-size:15px;color:var(--text3);line-height:1.6;margin-bottom:36px}
+.confetti-wrap{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:201}
+.confetti-piece{
+  position:absolute;top:-10px;
+  width:8px;height:8px;border-radius:2px;
+  animation:confettiFall linear forwards;
+}
+@keyframes confettiFall{
+  to{transform:translateY(110vh) rotate(720deg);opacity:0}
+}
+.btn-end-primary{
+  background:var(--accent);color:#fff;border-radius:var(--radius-lg);
+  padding:16px 32px;font-size:16px;font-weight:500;
+  width:100%;margin-bottom:10px;
+  transition:all .2s ease;
+}
+.btn-end-primary:active{transform:scale(.98)}
+.btn-end-secondary{
+  background:var(--bg2);border:1px solid var(--border2);
+  border-radius:var(--radius-lg);padding:14px 32px;
+  font-size:15px;font-weight:500;color:var(--text2);
+  width:100%;transition:all .2s ease;
+}
+.btn-end-secondary:active{transform:scale(.98)}
+
+/* ═══════════════════════════════════
+   INSTALL BANNER
+═══════════════════════════════════ */
+.install-banner{
+  margin:12px 24px 0;
+  background:linear-gradient(135deg,var(--bg2),var(--bg3));
+  border:1px solid var(--border2);border-radius:var(--radius-md);
+  padding:14px;display:flex;align-items:center;gap:12px;
+}
+.install-text{flex:1;font-size:13px;color:var(--text2);line-height:1.4}
+.install-text strong{color:var(--text);font-weight:500}
+.install-btn{
+  background:var(--accent);color:#fff;border-radius:var(--radius-sm);
+  padding:8px 14px;font-size:13px;font-weight:500;flex-shrink:0;
+  transition:all .2s ease;
+}
+.install-btn:active{transform:scale(.97)}
+.install-close{
+  width:28px;height:28px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;background:var(--bg3);flex-shrink:0;
+}
+.install-close svg{width:14px;height:14px;stroke:var(--text3);fill:none;stroke-width:2}
+
+/* ═══════════════════════════════════
+   REDUCED MOTION
+═══════════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *{animation-duration:.01ms !important;transition-duration:.01ms !important}
+}
+
+/* ═══════════════════════════════════
+   SCROLLBARS
+═══════════════════════════════════ */
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+</style>
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ═══ HOME ═══ -->
+  <section id="screen-home" class="screen active" role="main" aria-label="Accueil">
+    <div class="home-top">
+      <div class="home-logo">
+        <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="var(--accent)" opacity=".15"/>
+          <path d="M16 8 C14 12 10 13 10 17 C10 20.3 12.7 23 16 23 C19.3 23 22 20.3 22 17 C22 13 18 12 16 8Z" fill="var(--accent)" opacity=".9"/>
+          <path d="M13 20 C13 21.7 14.3 23 16 23" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity=".6"/>
+        </svg>
+        <span class="home-logo-name">Lueur</span>
+      </div>
+      <p class="home-greeting" id="greeting">Bonne soirée 🌙</p>
+    </div>
+
+    <div id="install-banner" class="install-banner" style="display:none">
+      <div class="install-text"><strong>Installer Lueur</strong><br>Accès rapide depuis votre écran d'accueil</div>
+      <button class="install-btn" onclick="installApp()" aria-label="Installer l'application">Installer</button>
+      <button class="install-close" onclick="document.getElementById('install-banner').style.display='none'" aria-label="Fermer">
+        <svg viewBox="0 0 14 14"><path d="M3 3l8 8M11 3l-8 8" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="qotd-card" onclick="openQOTD()" role="button" tabindex="0" aria-label="Question du jour">
+      <div class="qotd-bg"></div>
+      <div class="qotd-badge">✦ Question du jour</div>
+      <p class="qotd-q" id="qotd-text">"Si tu pouvais revivre un souvenir de nous deux, lequel ce serait ?"</p>
+      <div class="qotd-cta">Toucher pour jouer →</div>
+    </div>
+
+    <p class="section-title">Jouer maintenant</p>
+    <div class="modes-grid" id="home-modes-grid"></div>
+
+    <div class="streak-bar">
+      <span class="streak-icon">🔥</span>
+      <div class="streak-text">
+        <div class="streak-count" id="streak-count">0 session</div>
+        <div class="streak-label">cette semaine</div>
+      </div>
+    </div>
+    <div style="height:16px"></div>
+  </section>
+
+  <!-- ═══ MODES ═══ -->
+  <section id="screen-modes" class="screen" role="main" aria-label="Choisir un mode">
+    <div class="screen-header">
+      <h1 class="screen-title">À quelle ambiance ?</h1>
+      <p class="screen-sub">Choisissez l'humeur du moment.</p>
+    </div>
+    <div class="session-picker">
+      <div class="session-title">Longueur de session</div>
+      <div class="session-row">
+        <button class="session-btn selected" data-count="5" onclick="selectSession(this)" aria-pressed="true">
+          <span class="session-num">5</span><span class="session-lbl">rapide</span>
+        </button>
+        <button class="session-btn" data-count="10" onclick="selectSession(this)" aria-pressed="false">
+          <span class="session-num">10</span><span class="session-lbl">standard</span>
+        </button>
+        <button class="session-btn" data-count="15" onclick="selectSession(this)" aria-pressed="false">
+          <span class="session-num">15</span><span class="session-lbl">profonde</span>
+        </button>
+      </div>
+    </div>
+    <div class="modes-list" id="modes-list"></div>
+    <div style="height:8px"></div>
+  </section>
+
+  <!-- ═══ PLAY ═══ -->
+  <section id="screen-play" class="screen" role="main" aria-label="Partie en cours">
+    <div class="play-header">
+      <button class="play-back" onclick="goBack()" aria-label="Retour">
+        <svg viewBox="0 0 18 18"><path d="M11 3L5 9l6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="play-mode-info">
+        <div class="play-mode-name" id="play-mode-name">Ice Breaker</div>
+        <div class="play-progress-text" id="play-progress-text">Question 1 sur 5</div>
+      </div>
+      <button class="play-fav-btn" id="fav-btn" onclick="toggleFav()" aria-label="Ajouter aux favoris" aria-pressed="false">
+        <svg viewBox="0 0 20 20"><path d="M10 17s-7-4.35-7-9a4 4 0 018 0 4 4 0 018 0c0 4.65-7 9-7 9z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progress-bar-aria">
+        <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+      </div>
+    </div>
+    <div class="card-area">
+      <div class="question-card" id="question-card">
+        <div class="q-mode-badge" id="q-badge">🌱 Ice Breaker</div>
+        <p class="q-text" id="q-text" aria-live="polite">Chargement…</p>
+        <div class="q-intensity" id="q-intensity" aria-label="Intensité"></div>
+      </div>
+    </div>
+    <div class="play-actions">
+      <button class="btn-next" onclick="nextQuestion()" aria-label="Question suivante">
+        Question suivante <span aria-hidden="true">→</span>
+      </button>
+      <div class="play-row">
+        <button class="btn-secondary" onclick="skipQuestion()" aria-label="Passer cette question">
+          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Passer
+        </button>
+        <button class="btn-secondary" onclick="shuffleMode()" aria-label="Mode aléatoire">
+          <svg viewBox="0 0 16 16"><path d="M2 5h3l2 3-2 3H2M14 5h-3l-2 3 2 3h3M5 5l6 6M11 5l-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Aléatoire
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FAVORITES ═══ -->
+  <section id="screen-favs" class="screen" role="main" aria-label="Questions favorites">
+    <div class="screen-header">
+      <h1 class="screen-title">Vos favoris</h1>
+      <p class="screen-sub" id="favs-count-text">0 question sauvegardée</p>
+    </div>
+    <div class="favs-list" id="favs-list"></div>
+  </section>
+
+  <!-- ═══ SETTINGS ═══ -->
+  <section id="screen-settings" class="screen" role="main" aria-label="Paramètres">
+    <div class="screen-header">
+      <h1 class="screen-title">Notre espace</h1>
+      <p class="screen-sub">Personnalisez votre expérience.</p>
+    </div>
+    <div class="settings-body">
+      <div class="settings-section-title">Nos prénoms</div>
+      <div class="settings-item">
+        <div class="settings-item-text">
+          <div class="settings-item-label">Prénom 1</div>
+        </div>
+        <input class="settings-input" id="name1" type="text" placeholder="Vous" maxlength="20" aria-label="Votre prénom">
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-text">
+          <div class="settings-item-label">Prénom 2</div>
+        </div>
+        <input class="settings-input" id="name2" type="text" placeholder="Partenaire" maxlength="20" aria-label="Prénom de votre partenaire">
+      </div>
+      <div class="settings-section-title" style="margin-top:8px">Préférences</div>
+      <div class="settings-item">
+        <div class="settings-item-text">
+          <div class="settings-item-label">Questions intimes</div>
+          <div class="settings-item-sub">Afficher le mode Hot élégant</div>
+        </div>
+        <div class="toggle on" id="toggle-hot" role="switch" aria-checked="true" tabindex="0" onclick="toggleSetting(this,'hot')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleSetting(this,'hot')"></div>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-text">
+          <div class="settings-item-label">Chacun son tour</div>
+          <div class="settings-item-sub">Alterner qui répond en premier</div>
+        </div>
+        <div class="toggle" id="toggle-turns" role="switch" aria-checked="false" tabindex="0" onclick="toggleSetting(this,'turns')" onkeydown="if(event.key==='Enter'||event.key===' ')toggleSetting(this,'turns')"></div>
+      </div>
+      <div class="settings-section-title" style="margin-top:8px">Données</div>
+      <div class="settings-item" style="cursor:pointer" onclick="clearHistory()">
+        <div class="settings-item-text">
+          <div class="settings-item-label" style="color:var(--accent)">Effacer l'historique</div>
+          <div class="settings-item-sub">Réinitialiser les questions vues</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ NAV ═══ -->
+  <nav class="nav" aria-label="Navigation principale">
+    <button class="nav-btn active" data-screen="home" onclick="navigateTo('home')" aria-label="Accueil" aria-current="page">
+      <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M3 9.5L11 3l8 6.5V19a1 1 0 01-1 1H14v-5h-6v5H4a1 1 0 01-1-1z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Accueil</span>
+    </button>
+    <button class="nav-btn" data-screen="modes" onclick="navigateTo('modes')" aria-label="Jouer">
+      <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M11 7v4l3 3" stroke-linecap="round"/></svg>
+      <span>Jouer</span>
+    </button>
+    <button class="nav-btn" data-screen="favs" onclick="navigateTo('favs')" aria-label="Favoris">
+      <svg viewBox="0 0 22 22" aria-hidden="true"><path d="M11 19s-8-5-8-10a5 5 0 0110 0 5 5 0 0110 0c0 5-8 10-8 10z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span>Favoris</span>
+    </button>
+    <button class="nav-btn" data-screen="settings" onclick="navigateTo('settings')" aria-label="Paramètres">
+      <svg viewBox="0 0 22 22" aria-hidden="true"><circle cx="11" cy="11" r="3"/><path d="M11 2v2M11 18v2M2 11h2M18 11h2M4.9 4.9l1.4 1.4M15.7 15.7l1.4 1.4M4.9 17.1l1.4-1.4M15.7 6.3l1.4-1.4" stroke-linecap="round"/></svg>
+      <span>Nous</span>
+    </button>
+  </nav>
+
+</div>
+
+<!-- END SCREEN -->
+<div class="end-screen" id="end-screen" role="dialog" aria-modal="true" aria-label="Fin de session">
+  <div class="confetti-wrap" id="confetti-wrap"></div>
+  <div class="end-emoji" id="end-emoji">✨</div>
+  <h2 class="end-title" id="end-title">Bien joué, vous deux !</h2>
+  <p class="end-sub" id="end-sub">5 questions explorées. On continue la discussion ?</p>
+  <button class="btn-end-primary" onclick="restartSession()">Rejouer ce mode</button>
+  <button class="btn-end-secondary" onclick="closeEndScreen()">Choisir un autre mode</button>
+</div>
+
+<script>
+/* ═══════════════════════════════════
+   DATA — QUESTIONS
+═══════════════════════════════════ */
+const MODES = [
+  {
+    id:'ice',emoji:'🌱',name:'Ice Breaker',
+    desc:'Léger, spontané, sans prise de tête',
+    color:'#A8C5A0',
+    questions:[
+      {t:"Quel est ton film comfort que tu pourrais revoir à l'infini ?",i:1},
+      {t:"Si tu pouvais téléporter instantanément quelque part là maintenant, ce serait où ?",i:1},
+      {t:"Quel est le truc le plus inutile que tu saches faire et dont tu es secrètement fier·e ?",i:1},
+      {t:"C'est quoi ton repas de paresseux préféré quand tu ne veux vraiment pas cuisiner ?",i:1},
+      {t:"Si tu avais une journée entière pour toi, tu la passerais comment ?",i:1},
+      {t:"Quel est le dernier truc qui t'a vraiment fait rire ?",i:1},
+      {t:"Tu préfères les matins calmes ou les nuits tardives ?",i:1},
+      {t:"C'est quoi la chose que tu fais encore comme quand t'étais enfant ?",i:1},
+      {t:"Si tu pouvais avoir n'importe quel animal en mode apprivoisé, tu choisirais quoi ?",i:1},
+      {t:"Quel est ton ordre de priorité : café, douche, téléphone le matin ?",i:1},
+      {t:"C'est quoi le truc que tu achètes toujours mais dont tu n'as jamais vraiment besoin ?",i:1},
+      {t:"Si tu devais écouter un seul album pendant un mois, ce serait lequel ?",i:1},
+      {t:"Quel est le meilleur nom que tu aies donné à un objet chez toi ?",i:1},
+      {t:"Tu es plutôt : plan improvisé ou tout organisé à l'avance ?",i:1},
+      {t:"Quelle est la chose que tu fais systématiquement différemment de tout le monde ?",i:1},
+      {t:"Si tu pouvais maîtriser un talent instantanément, ce serait lequel ?",i:2},
+      {t:"C'est quoi ton péché mignon culinaire que tu assumes à moitié ?",i:1},
+      {t:"Quel est le livre ou la série qui t'a le plus marqué·e ces derniers temps ?",i:1},
+      {t:"Si ta vie avait une bande-son permanente, quel genre de musique ça serait ?",i:1},
+      {t:"C'est quoi la dernière bonne décision spontanée que tu as prise ?",i:1},
+      {t:"Tu es plutôt montagne, mer ou ville quand tu as besoin de souffler ?",i:1},
+      {t:"Si tu pouvais apprendre une langue du jour au lendemain, laquelle ?",i:1},
+      {t:"Quel est le truc que tu reportes depuis des semaines mais que tu n'arrives pas à faire ?",i:1},
+      {t:"C'est quoi la dernière chose qui t'a vraiment surpris·e en bien ?",i:1},
+      {t:"Si tu devais décrire ton style de vie en trois mots, ce seraient lesquels ?",i:1},
+      {t:"Quel est ton endroit préféré dans la maison pour ne rien faire ?",i:1},
+      {t:"C'est quoi le truc simple qui te met de bonne humeur à coup sûr ?",i:1},
+      {t:"Si tu organisais la soirée parfaite, elle ressemblerait à quoi ?",i:1},
+      {t:"Quel est le truc dont tu es incapable de te passer depuis que tu l'as découvert ?",i:1},
+      {t:"C'est quoi la chose que tu fais sans jamais t'ennuyer, même seul·e ?",i:1},
+    ]
+  },
+  {
+    id:'prefer',emoji:'⚖️',name:'Tu préfères',
+    desc:'Des choix impossibles, des révélations',
+    color:'#9DB5C8',
+    questions:[
+      {t:"Tu préfères voyager seul·e ou toujours avec quelqu'un ?",i:1},
+      {t:"Tu préfères recevoir un cadeau surprise ou choisir toi-même ?",i:1},
+      {t:"Tu préfères une soirée calme à deux ou une fête avec plein de monde ?",i:1},
+      {t:"Tu préfères être trop chaud·e ou trop froid·e ?",i:1},
+      {t:"Tu préfères toujours arriver en avance ou jamais être en retard mais juste à l'heure ?",i:1},
+      {t:"Tu préfères lire le livre ou regarder le film ?",i:2},
+      {t:"Tu préfères savoir à l'avance ce qui va se passer ou vivre dans la surprise totale ?",i:2},
+      {t:"Tu préfères une carrière qui te passionne moins bien payée, ou un job alimentaire très bien payé ?",i:2},
+      {t:"Tu préfères avoir raison ou être heureux·se ?",i:2},
+      {t:"Tu préfères une relation fusionnelle ou une relation avec beaucoup d'espace ?",i:2},
+      {t:"Tu préfères que les gens te disent la vérité même si ça fait mal, ou qu'on te protège un peu ?",i:2},
+      {t:"Tu préfères une maison à la campagne ou un appart en pleine ville ?",i:1},
+      {t:"Tu préfères travailler le matin très tôt ou le soir tard ?",i:1},
+      {t:"Tu préfères que le temps passe vite ou qu'il dure longtemps quand tu fais quelque chose ?",i:2},
+      {t:"Tu préfères faire un long voyage une fois par an ou des petits weekends souvent ?",i:1},
+      {t:"Tu préfères la mer en été ou la neige en hiver ?",i:1},
+      {t:"Tu préfères une vie simple et stable ou pleine de changements et d'aventures ?",i:2},
+      {t:"Tu préfères être trop occupé·e ou t'ennuyer un peu ?",i:1},
+      {t:"Tu préfères un repas gastronomique ou un repas du quotidien mais parfait ?",i:1},
+      {t:"Tu préfères qu'on te surprenne ou qu'on respecte scrupuleusement tes habitudes ?",i:1},
+      {t:"Tu préfères te souvenir de tout ou oublier facilement les mauvais moments ?",i:2},
+      {t:"Tu préfères une longue conversation de fond ou plein de petits échanges légers ?",i:2},
+      {t:"Tu préfères être très proche d'un cercle restreint ou avoir beaucoup de connaissances ?",i:1},
+      {t:"Tu préfères les débuts de relation ou la profondeur de ce qu'on construit avec le temps ?",i:2},
+      {t:"Tu préfères une journée sans smartphone ou une journée sans musique ?",i:1},
+    ]
+  },
+  {
+    id:'who',emoji:'👫',name:'Qui de nous deux',
+    desc:'Se comparer avec tendresse',
+    color:'#C8B09D',
+    questions:[
+      {t:"Qui de nous deux est le plus organisé·e ?",i:1},
+      {t:"Qui de nous deux prend les meilleures photos ?",i:1},
+      {t:"Qui de nous deux est le plus têtu·e ?",i:1},
+      {t:"Qui de nous deux s'adapte le mieux aux imprévus ?",i:1},
+      {t:"Qui de nous deux est le plus à l'aise en société ?",i:1},
+      {t:"Qui de nous deux est le plus romantique au quotidien ?",i:2},
+      {t:"Qui de nous deux est le plus courageux·se face à ses peurs ?",i:2},
+      {t:"Qui de nous deux a le plus de patience ?",i:1},
+      {t:"Qui de nous deux serait le meilleur·e chef en cuisine de survie ?",i:1},
+      {t:"Qui de nous deux est le plus nostalgique ?",i:1},
+      {t:"Qui de nous deux se souvient de plus de détails sur notre histoire ?",i:2},
+      {t:"Qui de nous deux rit le plus facilement ?",i:1},
+      {t:"Qui de nous deux se bat le moins contre son téléphone ?",i:1},
+      {t:"Qui de nous deux fait les meilleurs câlins ?",i:1},
+      {t:"Qui de nous deux est le plus optimiste quand les choses vont mal ?",i:2},
+      {t:"Qui de nous deux dit 'je t'aime' en premier d'habitude ?",i:2},
+      {t:"Qui de nous deux serait le plus capable de vivre sans l'autre une semaine sans craquer ?",i:2},
+      {t:"Qui de nous deux est le plus facile à lire dans ses émotions ?",i:2},
+      {t:"Qui de nous deux est le meilleur·e pour garder un secret ?",i:1},
+      {t:"Qui de nous deux a le meilleur sens de l'humour ?",i:1},
+    ]
+  },
+  {
+    id:'memories',emoji:'📸',name:'Souvenirs',
+    desc:'Revivre ensemble ce qui compte',
+    color:'#B5C4A0',
+    questions:[
+      {t:"C'est quoi le moment où tu as réalisé que tu tenais vraiment à moi ?",i:2},
+      {t:"Quel est ton souvenir préféré de notre premier mois ensemble ?",i:2},
+      {t:"Il y a un truc qu'on a fait ensemble qui t'a vraiment surpris·e ?",i:2},
+      {t:"C'est quoi la fois où tu as le plus ri avec moi ?",i:1},
+      {t:"Quel est le voyage ou la sortie qu'on a faite dont tu parles encore dans ta tête ?",i:2},
+      {t:"Tu te souviens de ce que tu portais le jour où on s'est rencontré·es ?",i:2},
+      {t:"C'est quoi un moment où tu as été fier·e de moi sans me le dire ?",i:2},
+      {t:"Il y a un truc qu'on a dit ou fait au tout début qu'on ne fait plus et qui te manque ?",i:3},
+      {t:"C'est quoi la meilleure surprise que tu m'aies faite ?",i:2},
+      {t:"Tu te souviens de notre premier repas ensemble ? C'était comment ?",i:2},
+      {t:"C'est quoi un moment difficile qu'on a traversé ensemble et dont tu es content·e ?",i:3},
+      {t:"Il y a un truc que je t'ai dit une fois et qui t'a vraiment touché·e ?",i:2},
+      {t:"C'est quoi le moment où on a le mieux ri d'une galère ?",i:1},
+      {t:"Quel souvenir tu aimerais qu'on recrée à l'identique un jour ?",i:2},
+      {t:"C'est quoi la chose qu'on a découverte ensemble dont tu ne connaissais rien avant ?",i:1},
+      {t:"Tu te rappelles la première photo de nous deux que tu as regardée longtemps ?",i:2},
+      {t:"C'est quoi la fois où tu t'es senti·e le plus proche de moi ?",i:3},
+      {t:"Il y a une soirée particulière avec nous deux que tu refaisais demain sans hésiter ?",i:2},
+      {t:"C'est quoi un moment du quotidien de nous deux qui te manquerait si tu le perdais ?",i:3},
+      {t:"Quel est le premier truc que tu as remarqué chez moi — pas physiquement ?",i:2},
+    ]
+  },
+  {
+    id:'deep',emoji:'🌊',name:'Deep Talk',
+    desc:'Pour les vraies conversations',
+    color:'#8FA8C4',
+    questions:[
+      {t:"C'est quoi ta plus grande crainte par rapport à notre futur à deux ?",i:3},
+      {t:"Qu'est-ce que tu cherches vraiment dans une relation à ce stade de ta vie ?",i:3},
+      {t:"C'est quoi la chose que tu n'oses pas toujours me dire de peur de ma réaction ?",i:3},
+      {t:"Si tu pouvais changer une chose dans notre façon de communiquer, ce serait quoi ?",i:3},
+      {t:"Quel est le domaine de ta vie où tu te sens encore perdu·e ou en construction ?",i:3},
+      {t:"C'est quoi ton rêve que tu gardes un peu pour toi parce qu'il te semble trop grand ?",i:3},
+      {t:"Qu'est-ce qui te manque parfois et que tu n'as pas encore dans ta vie ?",i:3},
+      {t:"C'est quoi la chose dont tu es le plus fier·e dans ton évolution personnelle ?",i:2},
+      {t:"Tu penses que les gens changent vraiment ou qu'ils restent fondamentalement les mêmes ?",i:2},
+      {t:"C'est quoi le moment de ta vie où tu t'es senti·e le plus seul·e ?",i:3},
+      {t:"Qu'est-ce que la liberté représente pour toi dans une relation ?",i:3},
+      {t:"C'est quoi la chose que ton moi d'il y a cinq ans ne comprendrait pas dans ta vie aujourd'hui ?",i:2},
+      {t:"Tu penses qu'on peut aimer quelqu'un sans toujours le comprendre ?",i:2},
+      {t:"C'est quoi ton rapport à la vulnérabilité — tu la montres ou tu la caches ?",i:3},
+      {t:"Quel est le sacrifice le plus difficile que tu aies fait pour quelqu'un ?",i:3},
+      {t:"C'est quoi la chose que tu as longtemps crue vraie sur toi mais qui s'est révélée fausse ?",i:2},
+      {t:"Tu penses qu'on a besoin de se transformer pour grandir ou qu'on peut grandir en restant soi ?",i:2},
+      {t:"C'est quoi la frontière entre être là pour quelqu'un et se perdre soi-même ?",i:3},
+      {t:"Quelle est la relation — familiale ou amicale — qui t'a le plus construit·e ?",i:3},
+      {t:"Si tu pouvais choisir comment les gens se souviennent de toi dans dix ans, ce serait comment ?",i:2},
+    ]
+  },
+  {
+    id:'romance',emoji:'🌹',name:'Romance',
+    desc:'Douceur, tendresse, désir léger',
+    color:'#C4A0A0',
+    questions:[
+      {t:"C'est quoi le geste que je fais qui te fait le plus craquer ?",i:2},
+      {t:"Tu as un fantasme de date parfaite avec moi que tu n'as jamais vraiment dit ?",i:2},
+      {t:"C'est quoi la chose que je fais naturellement et qui te touche chaque fois ?",i:2},
+      {t:"Si tu pouvais choisir un mot pour décrire ce que tu ressens avec moi, ce serait lequel ?",i:2},
+      {t:"C'est quoi le moment où tu te sens le plus aimé·e par moi ?",i:3},
+      {t:"Tu as une façon préférée de recevoir de l'affection ?",i:2},
+      {t:"C'est quoi le truc que je pourrais faire spontanément qui te rendrait vraiment heureux·se ?",i:2},
+      {t:"Si on avait une nuit parfaite ensemble sans contrainte, elle ressemblerait à quoi ?",i:2},
+      {t:"C'est quoi le détail physique de moi que tu remarques le plus ?",i:2},
+      {t:"Tu me dirais quelque chose que tu penses souvent mais que tu ne dis pas assez ?",i:3},
+      {t:"C'est quoi l'ambiance qui te met le plus dans un état d'esprit tendre ?",i:2},
+      {t:"Quel est le moment où tu as eu le plus envie de m'embrasser depuis qu'on est ensemble ?",i:2},
+      {t:"C'est quoi la chose chez moi qui te rassure ?",i:3},
+      {t:"Tu as une façon préférée qu'on finisse nos soirées ensemble ?",i:2},
+      {t:"C'est quoi le compliment que tu m'as fait et auquel tu pensais vraiment à fond ?",i:2},
+    ]
+  },
+  {
+    id:'hot',emoji:'🕯️',name:'Intime',
+    desc:'Élégant, sensuel, sans vulgarité',
+    color:'#B08080',
+    questions:[
+      {t:"C'est quoi le truc que je fais qui allume ta curiosité de la façon la plus inattendue ?",i:3},
+      {t:"Tu as un fantasme qu'on n'a jamais vraiment exploré ensemble ?",i:3},
+      {t:"C'est quoi le moment où tu as eu le plus envie de me toucher depuis le début ?",i:3},
+      {t:"Il y a une situation ou un contexte qui te rend naturellement plus attiré·e ?",i:3},
+      {t:"C'est quoi la chose que j'ai dite ou murmuré qui reste dans ta mémoire ?",i:3},
+      {t:"Tu me dirais quelque chose que tu n'oses pas initier mais que tu aimerais qu'on essaie ?",i:3},
+      {t:"C'est quoi ton rapport à la lenteur dans l'intimité — tu l'apprécies ou tu préfères l'intensité ?",i:3},
+      {t:"Si tu pouvais choisir l'ambiance parfaite pour une nuit avec moi, elle ressemblerait à quoi ?",i:3},
+      {t:"C'est quoi la frontière entre ce qui est intime et ce qui devient sacré pour toi ?",i:3},
+      {t:"Tu as une façon préférée d'être touché·e ou tenu·e que tu n'as jamais formulée ?",i:3},
+      {t:"C'est quoi le truc que tu ne fais qu'avec moi et nulle part ailleurs ?",i:3},
+      {t:"Si tu pouvais designer notre prochaine soirée intime de A à Z, elle commencerait comment ?",i:3},
+    ]
+  },
+  {
+    id:'random',emoji:'🎲',name:'Aléatoire',
+    desc:'Laisse le hasard décider',
+    color:'#A0A8C0',
+    questions:[] // rempli dynamiquement
+  }
+];
+
+/* ═══════════════════════════════════
+   STATE
+═══════════════════════════════════ */
+let state = {
+  currentScreen:'home',
+  currentMode:null,
+  sessionCount:5,
+  sessionIndex:0,
+  sessionQueue:[],
+  favorites:JSON.parse(localStorage.getItem('lueur_favs')||'[]'),
+  seen:JSON.parse(localStorage.getItem('lueur_seen')||'{}'),
+  settings:JSON.parse(localStorage.getItem('lueur_settings')||'{"hot":true,"turns":false,"name1":"","name2":""}'),
+  streak:parseInt(localStorage.getItem('lueur_streak')||'0'),
+  isFav:false,
+};
+
+let deferredPrompt = null;
+
+/* ═══════════════════════════════════
+   INIT
+═══════════════════════════════════ */
+window.addEventListener('load',()=>{
+  updateGreeting();
+  updateStreak();
+  renderHomeGrid();
+  renderModesList();
+  renderFavs();
+  applySettings();
+  setupQOTD();
+
+  // PWA install
+  window.addEventListener('beforeinstallprompt',(e)=>{
+    e.preventDefault();deferredPrompt=e;
+    document.getElementById('install-banner').style.display='flex';
+  });
+  window.addEventListener('appinstalled',()=>{
+    document.getElementById('install-banner').style.display='none';
+  });
+});
+
+function updateGreeting(){
+  const h=new Date().getHours();
+  const g=h<12?'Bonjour ☀️':h<18?'Bon après-midi 🌤️':'Bonne soirée 🌙';
+  document.getElementById('greeting').textContent=g;
+}
+
+function updateStreak(){
+  const s=state.streak;
+  document.getElementById('streak-count').textContent=s===0?'Aucune encore':s===1?'1 session':''+s+' sessions';
+}
+
+function setupQOTD(){
+  const allQ=MODES.slice(0,-1).flatMap(m=>m.questions);
+  const idx=new Date().getDate()%allQ.length;
+  document.getElementById('qotd-text').textContent='"'+allQ[idx].t+'"';
+}
+
+function openQOTD(){
+  const allQ=MODES.slice(0,-1).flatMap(m=>m.questions);
+  const idx=new Date().getDate()%allQ.length;
+  const q=allQ[idx];
+  const modeIdx=MODES.findIndex(m=>m.questions.includes(q));
+  startSession(modeIdx>=0?modeIdx:0,1,q);
+}
+
+/* ═══════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════ */
+function navigateTo(screen){
+  document.querySelectorAll('.screen').forEach(s=>{s.classList.remove('active')});
+  document.querySelectorAll('.nav-btn').forEach(b=>{
+    b.classList.toggle('active',b.dataset.screen===screen);
+    b.setAttribute('aria-current',b.dataset.screen===screen?'page':'false');
+  });
+  document.getElementById('screen-'+screen).classList.add('active');
+  state.currentScreen=screen;
+  if(screen==='favs')renderFavs();
+}
+
+function goBack(){
+  if(state.currentScreen==='play'){
+    navigateTo('modes');
+    document.getElementById('screen-play').classList.remove('active');
+    document.getElementById('screen-modes').classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.toggle('active',b.dataset.screen==='modes'));
+  }
+}
+
+/* ═══════════════════════════════════
+   HOME GRID
+═══════════════════════════════════ */
+function renderHomeGrid(){
+  const grid=document.getElementById('home-modes-grid');
+  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  grid.innerHTML=shown.slice(0,6).map((m,i)=>`
+    <div class="mode-card" onclick="startFromHome(${MODES.indexOf(m)})" role="button" tabindex="0"
+      aria-label="Jouer ${m.name}"
+      onkeydown="if(event.key==='Enter')startFromHome(${MODES.indexOf(m)})">
+      <span class="mode-icon" aria-hidden="true">${m.emoji}</span>
+      <span class="mode-name">${m.name}</span>
+      <span class="mode-desc">${m.desc}</span>
+    </div>`).join('');
+}
+
+function startFromHome(idx){
+  startSession(idx,state.sessionCount);
+}
+
+/* ═══════════════════════════════════
+   MODES LIST
+═══════════════════════════════════ */
+function renderModesList(){
+  const list=document.getElementById('modes-list');
+  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  list.innerHTML=shown.map(m=>`
+    <div class="mode-item" onclick="startSession(${MODES.indexOf(m)},state.sessionCount)"
+      role="button" tabindex="0" aria-label="Jouer ${m.name} — ${m.desc}"
+      onkeydown="if(event.key==='Enter')startSession(${MODES.indexOf(m)},state.sessionCount)">
+      <div class="mode-item-icon" style="background:${m.color}22">${m.emoji}</div>
+      <div class="mode-item-text">
+        <div class="mode-item-name">${m.name}</div>
+        <div class="mode-item-desc">${m.desc}</div>
+      </div>
+      <span class="mode-item-count">${m.questions.length||'∞'} q.</span>
+      <svg class="mode-item-chevron" viewBox="0 0 18 18" aria-hidden="true"><path d="M6 3l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>`).join('');
+}
+
+function selectSession(btn){
+  document.querySelectorAll('.session-btn').forEach(b=>{
+    b.classList.remove('selected');b.setAttribute('aria-pressed','false');
+  });
+  btn.classList.add('selected');btn.setAttribute('aria-pressed','true');
+  state.sessionCount=parseInt(btn.dataset.count);
+}
+
+/* ═══════════════════════════════════
+   GAME
+═══════════════════════════════════ */
+function buildQueue(modeIdx,count){
+  let pool;
+  if(MODES[modeIdx].id==='random'){
+    pool=MODES.slice(0,-1).filter(m=>m.id!=='hot'||state.settings.hot).flatMap(m=>m.questions.map(q=>({...q,_modeIdx:MODES.indexOf(m)})));
+  } else {
+    pool=MODES[modeIdx].questions.map(q=>({...q,_modeIdx:modeIdx}));
+  }
+  // déprioritiser les questions vues
+  const seen=state.seen[modeIdx]||[];
+  const unseen=pool.filter(q=>!seen.includes(q.t));
+  const src=unseen.length>=count?unseen:pool;
+  return shuffle([...src]).slice(0,count);
+}
+
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+
+function startSession(modeIdx,count,fixedQ){
+  state.currentMode=modeIdx;
+  state.sessionCount=count||state.sessionCount;
+  if(fixedQ){
+    state.sessionQueue=[{...fixedQ,_modeIdx:modeIdx}];
+    state.sessionCount=1;
+  } else {
+    state.sessionQueue=buildQueue(modeIdx,state.sessionCount);
+  }
+  state.sessionIndex=0;
+  state.isFav=false;
+
+  // switch to play screen
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('screen-play').classList.add('active');
+
+  renderQuestion();
+}
+
+function renderQuestion(){
+  const q=state.sessionQueue[state.sessionIndex];
+  if(!q){endSession();return;}
+  const mode=MODES[q._modeIdx]||MODES[state.currentMode];
+  const total=state.sessionQueue.length;
+  const current=state.sessionIndex+1;
+  const pct=(current/total)*100;
+
+  document.getElementById('play-mode-name').textContent=mode.name;
+  document.getElementById('play-progress-text').textContent=`Question ${current} sur ${total}`;
+  document.getElementById('progress-bar').style.width=pct+'%';
+  document.getElementById('progress-bar-aria').setAttribute('aria-valuenow',Math.round(pct));
+  document.getElementById('q-badge').innerHTML=mode.emoji+' '+mode.name;
+  document.getElementById('q-text').textContent=q.t;
+
+  // intensity dots
+  const dots=document.getElementById('q-intensity');
+  dots.innerHTML='';dots.setAttribute('aria-label',`Intensité ${q.i} sur 3`);
+  for(let i=1;i<=3;i++){
+    const d=document.createElement('div');
+    d.className='q-dot'+(i<=q.i?' on':'');dots.appendChild(d);
+  }
+
+  // fav state
+  const isFav=state.favorites.some(f=>f.t===q.t);
+  state.isFav=isFav;
+  const favBtn=document.getElementById('fav-btn');
+  favBtn.classList.toggle('active',isFav);
+  favBtn.setAttribute('aria-pressed',isFav?'true':'false');
+
+  // flip animation
+  const card=document.getElementById('question-card');
+  card.classList.remove('flip');
+  void card.offsetWidth;
+  card.classList.add('flip');
+
+  // marquer comme vue
+  if(!state.seen[q._modeIdx])state.seen[q._modeIdx]=[];
+  if(!state.seen[q._modeIdx].includes(q.t))state.seen[q._modeIdx].push(q.t);
+  // limite à 50 pour éviter blocage total
+  if(state.seen[q._modeIdx].length>50)state.seen[q._modeIdx].shift();
+  localStorage.setItem('lueur_seen',JSON.stringify(state.seen));
+}
+
+function nextQuestion(){
+  if(state.sessionIndex>=state.sessionQueue.length-1){endSession();return;}
+  state.sessionIndex++;
+  renderQuestion();
+}
+
+function skipQuestion(){
+  // remplacer la question actuelle par une nouvelle
+  const modeIdx=state.currentMode;
+  const allPool=buildQueue(modeIdx,1);
+  if(allPool.length>0){
+    state.sessionQueue[state.sessionIndex]=allPool[0];
+  } else {
+    nextQuestion();return;
+  }
+  renderQuestion();
+}
+
+function shuffleMode(){
+  state.sessionQueue=buildQueue(MODES.length-1,state.sessionCount);
+  state.sessionIndex=0;
+  renderQuestion();
+}
+
+function toggleFav(){
+  const q=state.sessionQueue[state.sessionIndex];
+  if(!q)return;
+  const idx=state.favorites.findIndex(f=>f.t===q.t);
+  if(idx>=0){
+    state.favorites.splice(idx,1);state.isFav=false;
+  } else {
+    state.favorites.push({...q,_modeIdx:state.currentMode});state.isFav=true;
+  }
+  const favBtn=document.getElementById('fav-btn');
+  favBtn.classList.toggle('active',state.isFav);
+  favBtn.setAttribute('aria-pressed',state.isFav?'true':'false');
+  localStorage.setItem('lueur_favs',JSON.stringify(state.favorites));
+}
+
+/* ═══════════════════════════════════
+   END SESSION
+═══════════════════════════════════ */
+const endMessages=[
+  {emoji:'✨',title:'Bien joué, vous deux !',sub:'La conversation peut continuer…'},
+  {emoji:'🌿',title:'Belle session.',sub:'On se retrouve bientôt ?'},
+  {emoji:'🌙',title:'Moment réussi.',sub:'Certaines réponses méritent d\'y revenir.'},
+  {emoji:'💫',title:'On se connaît un peu mieux.',sub:'Et c\'est beau.'},
+  {emoji:'🌹',title:'Merci pour cet instant.',sub:'À deux, c\'est toujours mieux.'},
+];
+
+function endSession(){
+  // streak
+  state.streak++;
+  localStorage.setItem('lueur_streak',state.streak);
+  updateStreak();
+
+  const msg=endMessages[Math.floor(Math.random()*endMessages.length)];
+  document.getElementById('end-emoji').textContent=msg.emoji;
+  document.getElementById('end-title').textContent=msg.title;
+  document.getElementById('end-sub').textContent=msg.sub;
+  document.getElementById('end-screen').classList.add('active');
+  spawnConfetti();
+}
+
+function closeEndScreen(){
+  document.getElementById('end-screen').classList.remove('active');
+  navigateTo('modes');
+}
+
+function restartSession(){
+  document.getElementById('end-screen').classList.remove('active');
+  startSession(state.currentMode,state.sessionCount);
+}
+
+function spawnConfetti(){
+  const wrap=document.getElementById('confetti-wrap');
+  wrap.innerHTML='';
+  const colors=['#C4714A','#E8A598','#D4956A','#A8C5A0','#9DB5C8','#C4A0A0'];
+  for(let i=0;i<30;i++){
+    const el=document.createElement('div');
+    el.className='confetti-piece';
+    el.style.cssText=`
+      left:${Math.random()*100}%;
+      background:${colors[Math.floor(Math.random()*colors.length)]};
+      width:${6+Math.random()*6}px;
+      height:${6+Math.random()*6}px;
+      animation-duration:${1.5+Math.random()*1.5}s;
+      animation-delay:${Math.random()*.5}s;
+      transform:rotate(${Math.random()*360}deg);
+    `;
+    wrap.appendChild(el);
+  }
+  setTimeout(()=>wrap.innerHTML='',3500);
+}
+
+/* ═══════════════════════════════════
+   FAVORITES
+═══════════════════════════════════ */
+function renderFavs(){
+  const list=document.getElementById('favs-list');
+  const count=state.favorites.length;
+  document.getElementById('favs-count-text').textContent=count===0?'Aucune question sauvegardée':count===1?'1 question sauvegardée':''+count+' questions sauvegardées';
+
+  if(count===0){
+    list.innerHTML=`<div class="empty-state">
+      <div class="empty-icon">🤍</div>
+      <div class="empty-title">Rien encore</div>
+      <div class="empty-sub">Appuyez sur le cœur pendant une partie pour sauvegarder vos questions préférées.</div>
+    </div>`;
+    return;
+  }
+
+  list.innerHTML=state.favorites.map((q,i)=>{
+    const mode=MODES[q._modeIdx]||MODES[0];
+    return `<div class="fav-item">
+      <span class="fav-icon" aria-hidden="true">${mode.emoji}</span>
+      <div>
+        <div class="fav-text">${q.t}</div>
+        <div class="fav-mode">${mode.name}</div>
+      </div>
+      <button class="fav-del" onclick="removeFav(${i})" aria-label="Supprimer ce favori">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" stroke-linecap="round"/></svg>
+      </button>
+    </div>`;
+  }).join('');
+}
+
+function removeFav(idx){
+  state.favorites.splice(idx,1);
+  localStorage.setItem('lueur_favs',JSON.stringify(state.favorites));
+  renderFavs();
+}
+
+/* ═══════════════════════════════════
+   SETTINGS
+═══════════════════════════════════ */
+function applySettings(){
+  document.getElementById('name1').value=state.settings.name1||'';
+  document.getElementById('name2').value=state.settings.name2||'';
+  document.getElementById('toggle-hot').classList.toggle('on',state.settings.hot);
+  document.getElementById('toggle-hot').setAttribute('aria-checked',state.settings.hot);
+  document.getElementById('toggle-turns').classList.toggle('on',state.settings.turns);
+  document.getElementById('toggle-turns').setAttribute('aria-checked',state.settings.turns);
+
+  document.getElementById('name1').addEventListener('input',function(){
+    state.settings.name1=this.value;saveSettings();
+  });
+  document.getElementById('name2').addEventListener('input',function(){
+    state.settings.name2=this.value;saveSettings();
+  });
+}
+
+function toggleSetting(el,key){
+  const on=!el.classList.contains('on');
+  el.classList.toggle('on',on);
+  el.setAttribute('aria-checked',on);
+  state.settings[key]=on;
+  saveSettings();
+  renderHomeGrid();renderModesList();
+}
+
+function saveSettings(){
+  localStorage.setItem('lueur_settings',JSON.stringify(state.settings));
+}
+
+function clearHistory(){
+  if(confirm('Réinitialiser les questions déjà vues ?')){
+    state.seen={};
+    localStorage.setItem('lueur_seen','{}');
+  }
+}
+
+/* ═══════════════════════════════════
+   PWA INSTALL
+═══════════════════════════════════ */
+function installApp(){
+  if(deferredPrompt){
+    deferredPrompt.prompt();
+    deferredPrompt.userChoice.then(()=>{deferredPrompt=null;});
+  }
+}
+
+/* ═══════════════════════════════════
+   SERVICE WORKER
+═══════════════════════════════════ */
+if('serviceWorker' in navigator){
+  navigator.serviceWorker.register('sw.js').catch(()=>{});
+}
+</script>
+</body>
+</html>
