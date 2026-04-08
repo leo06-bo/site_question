@@ -253,7 +253,7 @@ img{display:block}
 #screen-play{
   display:none;flex-direction:column;
   min-height:100dvh;
-  padding-bottom:calc(24px + var(--safe-bottom));
+  padding-bottom:calc(80px + var(--safe-bottom));
 }
 #screen-play.active{display:flex}
 .play-header{
@@ -316,7 +316,7 @@ img{display:block}
 }
 .card-area{
   flex:1;display:flex;flex-direction:column;
-  justify-content:center;padding:24px 20px;
+  justify-content:center;padding:24px 20px 8px;
   perspective:1000px;
 }
 .question-card{
@@ -364,8 +364,30 @@ img{display:block}
   padding:0 20px;flex-shrink:0;
   display:flex;flex-direction:column;gap:10px;
 }
+.play-nav-buttons{
+  display:flex;gap:10px;flex-direction:row-reverse;flex-wrap:wrap;
+}
+.btn-prev{
+  flex:1;background:var(--bg2);
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius-lg);
+  padding:16px;
+  font-size:16px;font-weight:600;
+  transition:var(--transition);
+  color:var(--text2);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+.btn-prev:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--accent);
+  background:var(--bg3);
+}
+.btn-prev:active{transform:scale(0.97)}
 .btn-next{
-  background:linear-gradient(135deg, var(--accent), var(--accent3));
+  flex:1;background:linear-gradient(135deg, var(--accent), var(--accent3));
   color:#fff;
   border-radius:var(--radius-lg);
   padding:16px;
@@ -613,11 +635,157 @@ img{display:block}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ═══════════════════════════════════
+   LOGIN & AUTH SCREENS
+═══════════════════════════════════ */
+.screen-auth{
+  display:none;flex-direction:column;
+  min-height:100dvh;padding:calc(var(--safe-top) + 24px) 20px 24px;
+  justify-content:center;align-items:center;
+}
+.screen-auth.active{display:flex}
+.auth-box{
+  width:100%;max-width:420px;
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--radius-xl);padding:40px 24px;
+  box-shadow:var(--shadow-lg);
+}
+.auth-title{
+  font-family:'Fraunces',serif;font-size:28px;font-weight:400;
+  color:var(--text);margin-bottom:8px;text-align:center;
+}
+.auth-sub{
+  color:var(--text3);font-size:14px;text-align:center;margin-bottom:32px;
+}
+.auth-input{
+  width:100%;padding:14px 16px;border-radius:var(--radius-md);
+  border:1.5px solid var(--border2);background:var(--bg2);
+  font-size:16px;color:var(--text);font-family:inherit;
+  transition:var(--transition);margin-bottom:12px;
+}
+.auth-input:focus{
+  outline:none;border-color:var(--accent);background:var(--bg);
+}
+.auth-button{
+  width:100%;padding:16px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-md);font-size:16px;font-weight:600;
+  cursor:pointer;transition:var(--transition);margin-bottom:12px;
+}
+.auth-button:hover{background:var(--accent3);box-shadow:var(--shadow-lg)}
+.auth-button:active{transform:scale(0.98)}
+.auth-link{
+  text-align:center;color:var(--text3);font-size:14px;
+}
+.auth-link a{color:var(--accent);text-decoration:none;font-weight:600;cursor:pointer}
+.auth-link a:hover{text-decoration:underline}
+.auth-error{
+  background:rgba(217,124,111,0.1);border:1px solid var(--accent);
+  border-radius:var(--radius-md);padding:12px;color:var(--accent);
+  font-size:13px;margin-bottom:16px;display:none;
+}
+.auth-error.show{display:block}
+
+.accounts-screen{
+  display:none;flex-direction:column;
+  min-height:100dvh;padding:calc(var(--safe-top) + 16px) 0 calc(80px + var(--safe-bottom)) 0;
+}
+.accounts-screen.active{display:flex}
+.accounts-header{
+  padding:0 20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.accounts-title{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:400;
+  color:var(--text);margin-bottom:4px;
+}
+.accounts-sub{
+  color:var(--text3);font-size:13px;
+}
+.accounts-list{
+  flex:1;overflow-y:auto;padding:20px;
+}
+.account-item{
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--radius-md);padding:16px;margin-bottom:12px;
+  cursor:pointer;transition:var(--transition);display:flex;
+  align-items:center;gap:12px;
+}
+.account-item:hover{background:var(--bg2);border-color:var(--accent)}
+.account-item.active{background:rgba(217,124,111,0.08);border-color:var(--accent)}
+.account-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;
+  align-items:center;justify-content:center;
+  font-weight:600;flex-shrink:0;
+}
+.account-info{flex:1}
+.account-name{font-weight:600;color:var(--text);margin-bottom:2px}
+.account-email{font-size:12px;color:var(--text3)}
+.account-actions{
+  display:flex;gap:8px;flex-shrink:0;
+}
+.account-btn{
+  width:32px;height:32px;border-radius:50%;background:var(--bg2);
+  border:1.5px solid var(--border2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);color:var(--text2);
+}
+.account-btn:hover{background:var(--bg3);border-color:var(--accent)}
+.accounts-new{
+  padding:20px;border-top:1px solid var(--border);
+}
+.accounts-new-btn{
+  width:100%;padding:14px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-md);font-size:15px;font-weight:600;
+  cursor:pointer;transition:var(--transition);
+}
+.accounts-new-btn:hover{background:var(--accent3)}
 </style>
 </head>
 <body>
 
 <div id="app">
+
+  <!-- ═══ LOGIN ═══ -->
+  <section id="screen-login" class="screen-auth active" role="main" aria-label="Connexion">
+    <div class="auth-box">
+      <h1 class="auth-title">Connexion</h1>
+      <p class="auth-sub">Accédez à votre compte Lueur</p>
+      <div class="auth-error" id="login-error"></div>
+      <input class="auth-input" id="login-email" type="email" placeholder="Email" aria-label="Email">
+      <input class="auth-input" id="login-password" type="password" placeholder="Mot de passe" aria-label="Mot de passe">
+      <button class="auth-button" onclick="handleLogin()" aria-label="Se connecter">Se connecter</button>
+      <p class="auth-link">Pas encore de compte ? <a onclick="showSignup()">Créer un compte</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ SIGNUP ═══ -->
+  <section id="screen-signup" class="screen-auth" role="main" aria-label="Cr\u00e9ation de compte">
+    <div class="auth-box">
+      <h1 class="auth-title">Créer un compte</h1>
+      <p class="auth-sub">Rejoignez Lueur</p>
+      <div class="auth-error" id="signup-error"></div>
+      <input class="auth-input" id="signup-email" type="email" placeholder="Email" aria-label="Email">
+      <input class="auth-input" id="signup-password" type="password" placeholder="Mot de passe" aria-label="Mot de passe">
+      <input class="auth-input" id="signup-password-confirm" type="password" placeholder="Confirmez le mot de passe" aria-label="Confirmez le mot de passe">
+      <button class="auth-button" onclick="handleSignup()" aria-label="Cr\u00e9er un compte">Créer un compte</button>
+      <p class="auth-link">Déjà inscrit ? <a onclick="showLogin()">Se connecter</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ ACCOUNTS ═══ -->
+  <section id="screen-accounts" class="accounts-screen" role="main" aria-label="Gestion des comptes">
+    <div class="accounts-header">
+      <h1 class="accounts-title">Mes comptes</h1>
+      <p class="accounts-sub">Cliquez sur un compte pour activer ou le gérer</p>
+    </div>
+    <div class="accounts-list" id="accounts-list"></div>
+    <div class="accounts-new">
+      <button class="accounts-new-btn" onclick="showSignup()" aria-label="Ajouter un compte">+ Ajouter un compte</button>
+      <button class="accounts-new-btn" style="background:var(--bg3);color:var(--text);margin-top:8px" onclick="handleLogout()" aria-label="D\u00e9connexion">Déconnexion</button>
+    </div>
+  </section>
 
   <!-- ═══ HOME ═══ -->
   <section id="screen-home" class="screen active" role="main" aria-label="Accueil">
@@ -705,17 +873,12 @@ img{display:block}
       </div>
     </div>
     <div class="play-actions">
-      <button class="btn-next" onclick="nextQuestion()" aria-label="Question suivante">
-        Question suivante <span aria-hidden="true">→</span>
-      </button>
-      <div class="play-row">
-        <button class="btn-secondary" onclick="skipQuestion()" aria-label="Passer cette question">
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Passer
+      <div class="play-nav-buttons">
+        <button class="btn-prev" id="prev-btn" onclick="previousQuestion()" aria-label="Question précédente" style="display:none">
+          <span aria-hidden="true">←</span> Précédente
         </button>
-        <button class="btn-secondary" onclick="shuffleMode()" aria-label="Mode aléatoire">
-          <svg viewBox="0 0 16 16"><path d="M2 5h3l2 3-2 3H2M14 5h-3l-2 3 2 3h3M5 5l6 6M11 5l-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Aléatoire
+        <button class="btn-next" onclick="nextQuestion()" aria-label="Question suivante">
+          Question suivante <span aria-hidden="true">→</span>
         </button>
       </div>
     </div>
@@ -772,6 +935,13 @@ img{display:block}
           <div class="settings-item-sub">Réinitialiser les questions vues</div>
         </div>
       </div>
+      <div class="settings-section-title" style="margin-top:12px">Compte</div>
+      <div class="settings-item" style="cursor:pointer" onclick="handleLogout()">
+        <div class="settings-item-text">
+          <div class="settings-item-label" style="color:var(--accent)">Se déconnecter</div>
+          <div class="settings-item-sub">Quitter votre compte</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -809,7 +979,208 @@ img{display:block}
 
 <script>
 /* ═══════════════════════════════════
-   DATA — QUESTIONS
+   FIREBASE CONFIGURATION
+═══════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyADFtEQdkA3B5nsORx62xRDsFj4DpA5R7Y",
+  authDomain: "lueur-app-1.firebaseapp.com",
+  projectId: "lueur-app-1",
+  storageBucket: "lueur-app-1.appspot.com",
+  messagingSenderId: "609889973421",
+  appId: "1:609889973421:web:31d128e618ae59ed5a8224"
+};
+
+let db, auth, currentUser;
+
+/* ═══════════════════════════════════
+   INITIALIZE FIREBASE
+═══════════════════════════════════ */
+async function initFirebase(){
+  const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+  const { getAuth, onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+  const { getFirestore } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+  
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    if(user) {
+      document.getElementById('screen-login').classList.remove('active');
+      document.getElementById('screen-signup').classList.remove('active');
+      showAccountsOrHome();
+    } else {
+      showLoginScreen();
+    }
+  });
+}
+
+/* ═══════════════════════════════════
+   AUTH FUNCTIONS
+═══════════════════════════════════ */
+async function handleLogin(){
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  
+  if(!email || !password) {
+    showError(errorEl, 'Remplissez tous les champs');
+    return;
+  }
+  
+  try {
+    const { signInWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await signInWithEmailAndPassword(auth, email, password);
+    showAccountsOrHome();
+  } catch(error) {
+    showError(errorEl, 'Email ou mot de passe incorrect');
+  }
+}
+
+async function handleSignup(){
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  const passwordConfirm = document.getElementById('signup-password-confirm').value;
+  const errorEl = document.getElementById('signup-error');
+  
+  if(!email || !password || !passwordConfirm) {
+    showError(errorEl, 'Remplissez tous les champs');
+    return;
+  }
+  
+  if(password !== passwordConfirm) {
+    showError(errorEl, 'Les mots de passe ne correspondent pas');
+    return;
+  }
+  
+  if(password.length < 6) {
+    showError(errorEl, 'Le mot de passe doit faire au moins 6 caractères');
+    return;
+  }
+  
+  try {
+    const { createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await createUserWithEmailAndPassword(auth, email, password);
+    showAccountsOrHome();
+  } catch(error) {
+    if(error.code === 'auth/email-already-in-use') {
+      showError(errorEl, 'Cet email est déjà utilisé');
+    } else {
+      showError(errorEl, 'Erreur lors de la création du compte');
+    }
+  }
+}
+
+async function handleLogout(){
+  try {
+    const { signOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await signOut(auth);
+    showLoginScreen();
+  } catch(error) {
+    console.error('Erreur déconnexion:', error);
+  }
+}
+
+function showError(element, message){
+  element.textContent = message;
+  element.classList.add('show');
+  setTimeout(() => element.classList.remove('show'), 5000);
+}
+
+function showLoginScreen(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-login').classList.add('active');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+}
+
+function showSignup(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-signup').classList.add('active');
+  document.getElementById('signup-email').value = '';
+  document.getElementById('signup-password').value = '';
+  document.getElementById('signup-password-confirm').value = '';
+}
+
+function showLogin(){
+  showLoginScreen();
+}
+
+async function showAccountsOrHome(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  
+  if(currentUser) {
+    await onUserLoggedIn();
+    document.getElementById('screen-home').classList.add('active');
+    document.querySelector('[data-screen="home"]').classList.add('active');
+  }
+}
+
+async function loadUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, getDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    const userSnap = await getDoc(userRef);
+    
+    if(userSnap.exists()) {
+      const userData = userSnap.data();
+      state = { ...state, ...userData };
+      localStorage.setItem('lueur_state', JSON.stringify(state));
+    } else {
+      await initializeUserData();
+    }
+  } catch(error) {
+    console.error('Erreur chargement données:', error);
+  }
+}
+
+async function initializeUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, setDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    const userData = {
+      email: currentUser.email,
+      name1: 'Vous',
+      name2: 'Partenaire',
+      favorites: [],
+      seen: {},
+      streak: 0,
+      hot: true,
+      turns: false,
+      createdAt: new Date()
+    };
+    await setDoc(userRef, userData);
+    state = { ...state, ...userData };
+  } catch(error) {
+    console.error('Erreur initia données:', error);
+  }
+}
+
+async function saveUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    await updateDoc(userRef, {
+      favorites: state.favorites,
+      seen: state.seen,
+      streak: state.streak,
+      name1: state.name1,
+      name2: state.name2,
+      hot: state.hot,
+      turns: state.turns,
+      updatedAt: new Date()
+    });
+  } catch(error) {
+    console.error('Erreur sauvegarde:', error);
+  }
+}
+
+/* ═══════════════════════════════════DATA — QUESTIONS
 ═══════════════════════════════════ */
 const MODES = [
   {
@@ -1020,11 +1391,15 @@ let state = {
   sessionCount:5,
   sessionIndex:0,
   sessionQueue:[],
-  favorites:JSON.parse(localStorage.getItem('lueur_favs')||'[]'),
-  seen:JSON.parse(localStorage.getItem('lueur_seen')||'{}'),
-  settings:JSON.parse(localStorage.getItem('lueur_settings')||'{"hot":true,"turns":false,"name1":"","name2":""}'),
-  streak:parseInt(localStorage.getItem('lueur_streak')||'0'),
+  favorites:[],
+  seen:{},
+  name1:'Vous',
+  name2:'Partenaire',
+  streak:0,
+  hot:true,
+  turns:false,
   isFav:false,
+  userId:null,
 };
 
 let deferredPrompt = null;
@@ -1033,12 +1408,7 @@ let deferredPrompt = null;
    INIT
 ═══════════════════════════════════ */
 window.addEventListener('load',()=>{
-  updateGreeting();
-  updateStreak();
-  renderHomeGrid();
-  renderModesList();
-  renderFavs();
-  applySettings();
+  initFirebase();
 
   // PWA install
   window.addEventListener('beforeinstallprompt',(e)=>{
@@ -1059,6 +1429,20 @@ function updateGreeting(){
 function updateStreak(){
   const s=state.streak;
   document.getElementById('streak-count').textContent=s===0?'Aucune encore':s===1?'1 session':''+s+' sessions';
+}
+
+async function onUserLoggedIn(){
+  if(currentUser) {
+    state.userId = currentUser.uid;
+    state.name1 = localStorage.getItem('lueur_name1') || 'Vous';
+    state.name2 = localStorage.getItem('lueur_name2') || 'Partenaire';
+    updateGreeting();
+    updateStreak();
+    renderHomeGrid();
+    renderModesList();
+    renderFavs();
+    applySettings();
+  }
 }
 
 /* ═══════════════════════════════════
@@ -1084,7 +1468,7 @@ function goBack(){
 ═══════════════════════════════════ */
 function renderHomeGrid(){
   const grid=document.getElementById('home-modes-grid');
-  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  const shown=MODES.filter(m=>m.id!=='hot'||state.hot);
   grid.innerHTML=shown.slice(0,6).map((m,i)=>`
     <div class="mode-card" onclick="startFromHome(${MODES.indexOf(m)})" role="button" tabindex="0"
       aria-label="Jouer ${m.name}"
@@ -1104,7 +1488,7 @@ function startFromHome(idx){
 ═══════════════════════════════════ */
 function renderModesList(){
   const list=document.getElementById('modes-list');
-  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  const shown=MODES.filter(m=>m.id!=='hot'||state.hot);
   list.innerHTML=shown.map(m=>`
     <div class="mode-item" onclick="startSession(${MODES.indexOf(m)},state.sessionCount)"
       role="button" tabindex="0" aria-label="Jouer ${m.name} — ${m.desc}"
@@ -1133,7 +1517,7 @@ function selectSession(btn){
 function buildQueue(modeIdx,count){
   let pool;
   if(MODES[modeIdx].id==='random'){
-    pool=MODES.slice(0,-1).filter(m=>m.id!=='hot'||state.settings.hot).flatMap(m=>m.questions.map(q=>({...q,_modeIdx:MODES.indexOf(m)})));
+    pool=MODES.slice(0,-1).filter(m=>m.id!=='hot'||state.hot).flatMap(m=>m.questions.map(q=>({...q,_modeIdx:MODES.indexOf(m)})));
   } else {
     pool=MODES[modeIdx].questions.map(q=>({...q,_modeIdx:modeIdx}));
   }
@@ -1211,12 +1595,31 @@ function renderQuestion(){
   // limite à 50 pour éviter blocage total
   if(state.seen[q._modeIdx].length>50)state.seen[q._modeIdx].shift();
   localStorage.setItem('lueur_seen',JSON.stringify(state.seen));
+  
+  updatePrevButton();
 }
 
 function nextQuestion(){
   if(state.sessionIndex>=state.sessionQueue.length-1){endSession();return;}
   state.sessionIndex++;
   renderQuestion();
+  updatePrevButton();
+}
+
+function previousQuestion(){
+  if(state.sessionIndex<=0)return;
+  state.sessionIndex--;
+  renderQuestion();
+  updatePrevButton();
+}
+
+function updatePrevButton(){
+  const prevBtn=document.getElementById('prev-btn');
+  if(state.sessionIndex>0){
+    prevBtn.style.display='flex';
+  } else {
+    prevBtn.style.display='none';
+  }
 }
 
 function skipQuestion(){
@@ -1237,7 +1640,7 @@ function shuffleMode(){
   renderQuestion();
 }
 
-function toggleFav(){
+async function toggleFav(){
   const q=state.sessionQueue[state.sessionIndex];
   if(!q)return;
   const idx=state.favorites.findIndex(f=>f.t===q.t);
@@ -1249,7 +1652,7 @@ function toggleFav(){
   const favBtn=document.getElementById('fav-btn');
   favBtn.classList.toggle('active',state.isFav);
   favBtn.setAttribute('aria-pressed',state.isFav?'true':'false');
-  localStorage.setItem('lueur_favs',JSON.stringify(state.favorites));
+  await saveUserData();
 }
 
 /* ═══════════════════════════════════
@@ -1266,7 +1669,7 @@ const endMessages=[
 function endSession(){
   // streak
   state.streak++;
-  localStorage.setItem('lueur_streak',state.streak);
+  saveUserData();
   updateStreak();
 
   const msg=endMessages[Math.floor(Math.random()*endMessages.length)];
@@ -1350,18 +1753,18 @@ function removeFav(idx){
    SETTINGS
 ═══════════════════════════════════ */
 function applySettings(){
-  document.getElementById('name1').value=state.settings.name1||'';
-  document.getElementById('name2').value=state.settings.name2||'';
-  document.getElementById('toggle-hot').classList.toggle('on',state.settings.hot);
-  document.getElementById('toggle-hot').setAttribute('aria-checked',state.settings.hot);
-  document.getElementById('toggle-turns').classList.toggle('on',state.settings.turns);
-  document.getElementById('toggle-turns').setAttribute('aria-checked',state.settings.turns);
+  document.getElementById('name1').value=state.name1||'';
+  document.getElementById('name2').value=state.name2||'';
+  document.getElementById('toggle-hot').classList.toggle('on',state.hot);
+  document.getElementById('toggle-hot').setAttribute('aria-checked',state.hot);
+  document.getElementById('toggle-turns').classList.toggle('on',state.turns);
+  document.getElementById('toggle-turns').setAttribute('aria-checked',state.turns);
 
   document.getElementById('name1').addEventListener('input',function(){
-    state.settings.name1=this.value;saveSettings();
+    state.name1=this.value;saveSettings();
   });
   document.getElementById('name2').addEventListener('input',function(){
-    state.settings.name2=this.value;saveSettings();
+    state.name2=this.value;saveSettings();
   });
 }
 
@@ -1369,19 +1772,21 @@ function toggleSetting(el,key){
   const on=!el.classList.contains('on');
   el.classList.toggle('on',on);
   el.setAttribute('aria-checked',on);
-  state.settings[key]=on;
+  state[key]=on;
   saveSettings();
   renderHomeGrid();renderModesList();
 }
 
-function saveSettings(){
-  localStorage.setItem('lueur_settings',JSON.stringify(state.settings));
+async function saveSettings(){
+  localStorage.setItem('lueur_name1',state.name1);
+  localStorage.setItem('lueur_name2',state.name2);
+  await saveUserData();
 }
 
-function clearHistory(){
+async function clearHistory(){
   if(confirm('Réinitialiser les questions déjà vues ?')){
     state.seen={};
-    localStorage.setItem('lueur_seen','{}');
+    await saveUserData();
   }
 }
 
