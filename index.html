@@ -253,7 +253,7 @@ img{display:block}
 #screen-play{
   display:none;flex-direction:column;
   min-height:100dvh;
-  padding-bottom:calc(24px + var(--safe-bottom));
+  padding-bottom:calc(80px + var(--safe-bottom));
 }
 #screen-play.active{display:flex}
 .play-header{
@@ -316,7 +316,7 @@ img{display:block}
 }
 .card-area{
   flex:1;display:flex;flex-direction:column;
-  justify-content:center;padding:24px 20px;
+  justify-content:center;padding:24px 20px 8px;
   perspective:1000px;
 }
 .question-card{
@@ -364,8 +364,30 @@ img{display:block}
   padding:0 20px;flex-shrink:0;
   display:flex;flex-direction:column;gap:10px;
 }
+.play-nav-buttons{
+  display:flex;gap:10px;flex-direction:row-reverse;flex-wrap:wrap;
+}
+.btn-prev{
+  flex:1;background:var(--bg2);
+  border:1.5px solid var(--border2);
+  border-radius:var(--radius-lg);
+  padding:16px;
+  font-size:16px;font-weight:600;
+  transition:var(--transition);
+  color:var(--text2);
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  box-shadow:var(--shadow);
+  cursor:pointer;
+}
+.btn-prev:hover{
+  transform:translateY(-1px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--accent);
+  background:var(--bg3);
+}
+.btn-prev:active{transform:scale(0.97)}
 .btn-next{
-  background:linear-gradient(135deg, var(--accent), var(--accent3));
+  flex:1;background:linear-gradient(135deg, var(--accent), var(--accent3));
   color:#fff;
   border-radius:var(--radius-lg);
   padding:16px;
@@ -613,11 +635,157 @@ img{display:block}
 ::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
+
+/* ═══════════════════════════════════
+   LOGIN & AUTH SCREENS
+═══════════════════════════════════ */
+.screen-auth{
+  display:none;flex-direction:column;
+  min-height:100dvh;padding:calc(var(--safe-top) + 24px) 20px 24px;
+  justify-content:center;align-items:center;
+}
+.screen-auth.active{display:flex}
+.auth-box{
+  width:100%;max-width:420px;
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--radius-xl);padding:40px 24px;
+  box-shadow:var(--shadow-lg);
+}
+.auth-title{
+  font-family:'Fraunces',serif;font-size:28px;font-weight:400;
+  color:var(--text);margin-bottom:8px;text-align:center;
+}
+.auth-sub{
+  color:var(--text3);font-size:14px;text-align:center;margin-bottom:32px;
+}
+.auth-input{
+  width:100%;padding:14px 16px;border-radius:var(--radius-md);
+  border:1.5px solid var(--border2);background:var(--bg2);
+  font-size:16px;color:var(--text);font-family:inherit;
+  transition:var(--transition);margin-bottom:12px;
+}
+.auth-input:focus{
+  outline:none;border-color:var(--accent);background:var(--bg);
+}
+.auth-button{
+  width:100%;padding:16px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-md);font-size:16px;font-weight:600;
+  cursor:pointer;transition:var(--transition);margin-bottom:12px;
+}
+.auth-button:hover{background:var(--accent3);box-shadow:var(--shadow-lg)}
+.auth-button:active{transform:scale(0.98)}
+.auth-link{
+  text-align:center;color:var(--text3);font-size:14px;
+}
+.auth-link a{color:var(--accent);text-decoration:none;font-weight:600;cursor:pointer}
+.auth-link a:hover{text-decoration:underline}
+.auth-error{
+  background:rgba(217,124,111,0.1);border:1px solid var(--accent);
+  border-radius:var(--radius-md);padding:12px;color:var(--accent);
+  font-size:13px;margin-bottom:16px;display:none;
+}
+.auth-error.show{display:block}
+
+.accounts-screen{
+  display:none;flex-direction:column;
+  min-height:100dvh;padding:calc(var(--safe-top) + 16px) 0 calc(80px + var(--safe-bottom)) 0;
+}
+.accounts-screen.active{display:flex}
+.accounts-header{
+  padding:0 20px 20px;
+  border-bottom:1px solid var(--border);
+}
+.accounts-title{
+  font-family:'Fraunces',serif;font-size:24px;font-weight:400;
+  color:var(--text);margin-bottom:4px;
+}
+.accounts-sub{
+  color:var(--text3);font-size:13px;
+}
+.accounts-list{
+  flex:1;overflow-y:auto;padding:20px;
+}
+.account-item{
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--radius-md);padding:16px;margin-bottom:12px;
+  cursor:pointer;transition:var(--transition);display:flex;
+  align-items:center;gap:12px;
+}
+.account-item:hover{background:var(--bg2);border-color:var(--accent)}
+.account-item.active{background:rgba(217,124,111,0.08);border-color:var(--accent)}
+.account-avatar{
+  width:44px;height:44px;border-radius:50%;
+  background:var(--accent);color:#fff;display:flex;
+  align-items:center;justify-content:center;
+  font-weight:600;flex-shrink:0;
+}
+.account-info{flex:1}
+.account-name{font-weight:600;color:var(--text);margin-bottom:2px}
+.account-email{font-size:12px;color:var(--text3)}
+.account-actions{
+  display:flex;gap:8px;flex-shrink:0;
+}
+.account-btn{
+  width:32px;height:32px;border-radius:50%;background:var(--bg2);
+  border:1.5px solid var(--border2);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:var(--transition);color:var(--text2);
+}
+.account-btn:hover{background:var(--bg3);border-color:var(--accent)}
+.accounts-new{
+  padding:20px;border-top:1px solid var(--border);
+}
+.accounts-new-btn{
+  width:100%;padding:14px;background:var(--accent);color:#fff;
+  border:none;border-radius:var(--radius-md);font-size:15px;font-weight:600;
+  cursor:pointer;transition:var(--transition);
+}
+.accounts-new-btn:hover{background:var(--accent3)}
 </style>
 </head>
 <body>
 
 <div id="app">
+
+  <!-- ═══ LOGIN ═══ -->
+  <section id="screen-login" class="screen-auth active" role="main" aria-label="Connexion">
+    <div class="auth-box">
+      <h1 class="auth-title">Connexion</h1>
+      <p class="auth-sub">Accédez à votre compte Lueur</p>
+      <div class="auth-error" id="login-error"></div>
+      <input class="auth-input" id="login-email" type="email" placeholder="Email" aria-label="Email">
+      <input class="auth-input" id="login-password" type="password" placeholder="Mot de passe" aria-label="Mot de passe">
+      <button class="auth-button" onclick="handleLogin()" aria-label="Se connecter">Se connecter</button>
+      <p class="auth-link">Pas encore de compte ? <a onclick="showSignup()">Créer un compte</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ SIGNUP ═══ -->
+  <section id="screen-signup" class="screen-auth" role="main" aria-label="Cr\u00e9ation de compte">
+    <div class="auth-box">
+      <h1 class="auth-title">Créer un compte</h1>
+      <p class="auth-sub">Rejoignez Lueur</p>
+      <div class="auth-error" id="signup-error"></div>
+      <input class="auth-input" id="signup-email" type="email" placeholder="Email" aria-label="Email">
+      <input class="auth-input" id="signup-password" type="password" placeholder="Mot de passe" aria-label="Mot de passe">
+      <input class="auth-input" id="signup-password-confirm" type="password" placeholder="Confirmez le mot de passe" aria-label="Confirmez le mot de passe">
+      <button class="auth-button" onclick="handleSignup()" aria-label="Cr\u00e9er un compte">Créer un compte</button>
+      <p class="auth-link">Déjà inscrit ? <a onclick="showLogin()">Se connecter</a></p>
+    </div>
+  </section>
+
+  <!-- ═══ ACCOUNTS ═══ -->
+  <section id="screen-accounts" class="accounts-screen" role="main" aria-label="Gestion des comptes">
+    <div class="accounts-header">
+      <h1 class="accounts-title">Mes comptes</h1>
+      <p class="accounts-sub">Cliquez sur un compte pour activer ou le gérer</p>
+    </div>
+    <div class="accounts-list" id="accounts-list"></div>
+    <div class="accounts-new">
+      <button class="accounts-new-btn" onclick="showSignup()" aria-label="Ajouter un compte">+ Ajouter un compte</button>
+      <button class="accounts-new-btn" style="background:var(--bg3);color:var(--text);margin-top:8px" onclick="handleLogout()" aria-label="D\u00e9connexion">Déconnexion</button>
+    </div>
+  </section>
 
   <!-- ═══ HOME ═══ -->
   <section id="screen-home" class="screen active" role="main" aria-label="Accueil">
@@ -705,17 +873,12 @@ img{display:block}
       </div>
     </div>
     <div class="play-actions">
-      <button class="btn-next" onclick="nextQuestion()" aria-label="Question suivante">
-        Question suivante <span aria-hidden="true">→</span>
-      </button>
-      <div class="play-row">
-        <button class="btn-secondary" onclick="skipQuestion()" aria-label="Passer cette question">
-          <svg viewBox="0 0 16 16"><path d="M3 8h10M9 4l4 4-4 4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Passer
+      <div class="play-nav-buttons">
+        <button class="btn-prev" id="prev-btn" onclick="previousQuestion()" aria-label="Question précédente" style="display:none">
+          <span aria-hidden="true">←</span> Précédente
         </button>
-        <button class="btn-secondary" onclick="shuffleMode()" aria-label="Mode aléatoire">
-          <svg viewBox="0 0 16 16"><path d="M2 5h3l2 3-2 3H2M14 5h-3l-2 3 2 3h3M5 5l6 6M11 5l-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Aléatoire
+        <button class="btn-next" onclick="nextQuestion()" aria-label="Question suivante">
+          Question suivante <span aria-hidden="true">→</span>
         </button>
       </div>
     </div>
@@ -772,6 +935,13 @@ img{display:block}
           <div class="settings-item-sub">Réinitialiser les questions vues</div>
         </div>
       </div>
+      <div class="settings-section-title" style="margin-top:12px">Compte</div>
+      <div class="settings-item" style="cursor:pointer" onclick="handleLogout()">
+        <div class="settings-item-text">
+          <div class="settings-item-label" style="color:var(--accent)">Se déconnecter</div>
+          <div class="settings-item-sub">Quitter votre compte</div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -809,7 +979,208 @@ img{display:block}
 
 <script>
 /* ═══════════════════════════════════
-   DATA — QUESTIONS
+   FIREBASE CONFIGURATION
+═══════════════════════════════════ */
+const firebaseConfig = {
+  apiKey: "AIzaSyADFtEQdkA3B5nsORx62xRDsFj4DpA5R7Y",
+  authDomain: "lueur-app-1.firebaseapp.com",
+  projectId: "lueur-app-1",
+  storageBucket: "lueur-app-1.appspot.com",
+  messagingSenderId: "609889973421",
+  appId: "1:609889973421:web:31d128e618ae59ed5a8224"
+};
+
+let db, auth, currentUser;
+
+/* ═══════════════════════════════════
+   INITIALIZE FIREBASE
+═══════════════════════════════════ */
+async function initFirebase(){
+  const { initializeApp } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js');
+  const { getAuth, onAuthStateChanged } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+  const { getFirestore } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+  
+  const app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+  db = getFirestore(app);
+  
+  onAuthStateChanged(auth, (user) => {
+    currentUser = user;
+    if(user) {
+      document.getElementById('screen-login').classList.remove('active');
+      document.getElementById('screen-signup').classList.remove('active');
+      showAccountsOrHome();
+    } else {
+      showLoginScreen();
+    }
+  });
+}
+
+/* ═══════════════════════════════════
+   AUTH FUNCTIONS
+═══════════════════════════════════ */
+async function handleLogin(){
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errorEl = document.getElementById('login-error');
+  
+  if(!email || !password) {
+    showError(errorEl, 'Remplissez tous les champs');
+    return;
+  }
+  
+  try {
+    const { signInWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await signInWithEmailAndPassword(auth, email, password);
+    showAccountsOrHome();
+  } catch(error) {
+    showError(errorEl, 'Email ou mot de passe incorrect');
+  }
+}
+
+async function handleSignup(){
+  const email = document.getElementById('signup-email').value.trim();
+  const password = document.getElementById('signup-password').value;
+  const passwordConfirm = document.getElementById('signup-password-confirm').value;
+  const errorEl = document.getElementById('signup-error');
+  
+  if(!email || !password || !passwordConfirm) {
+    showError(errorEl, 'Remplissez tous les champs');
+    return;
+  }
+  
+  if(password !== passwordConfirm) {
+    showError(errorEl, 'Les mots de passe ne correspondent pas');
+    return;
+  }
+  
+  if(password.length < 6) {
+    showError(errorEl, 'Le mot de passe doit faire au moins 6 caractères');
+    return;
+  }
+  
+  try {
+    const { createUserWithEmailAndPassword } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await createUserWithEmailAndPassword(auth, email, password);
+    showAccountsOrHome();
+  } catch(error) {
+    if(error.code === 'auth/email-already-in-use') {
+      showError(errorEl, 'Cet email est déjà utilisé');
+    } else {
+      showError(errorEl, 'Erreur lors de la création du compte');
+    }
+  }
+}
+
+async function handleLogout(){
+  try {
+    const { signOut } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js');
+    await signOut(auth);
+    showLoginScreen();
+  } catch(error) {
+    console.error('Erreur déconnexion:', error);
+  }
+}
+
+function showError(element, message){
+  element.textContent = message;
+  element.classList.add('show');
+  setTimeout(() => element.classList.remove('show'), 5000);
+}
+
+function showLoginScreen(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-login').classList.add('active');
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+}
+
+function showSignup(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-signup').classList.add('active');
+  document.getElementById('signup-email').value = '';
+  document.getElementById('signup-password').value = '';
+  document.getElementById('signup-password-confirm').value = '';
+}
+
+function showLogin(){
+  showLoginScreen();
+}
+
+async function showAccountsOrHome(){
+  document.querySelectorAll('.screen-auth').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  
+  if(currentUser) {
+    await onUserLoggedIn();
+    document.getElementById('screen-home').classList.add('active');
+    document.querySelector('[data-screen="home"]').classList.add('active');
+  }
+}
+
+async function loadUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, getDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    const userSnap = await getDoc(userRef);
+    
+    if(userSnap.exists()) {
+      const userData = userSnap.data();
+      state = { ...state, ...userData };
+      localStorage.setItem('lueur_state', JSON.stringify(state));
+    } else {
+      await initializeUserData();
+    }
+  } catch(error) {
+    console.error('Erreur chargement données:', error);
+  }
+}
+
+async function initializeUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, setDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    const userData = {
+      email: currentUser.email,
+      name1: 'Vous',
+      name2: 'Partenaire',
+      favorites: [],
+      seen: {},
+      streak: 0,
+      hot: true,
+      turns: false,
+      createdAt: new Date()
+    };
+    await setDoc(userRef, userData);
+    state = { ...state, ...userData };
+  } catch(error) {
+    console.error('Erreur initia données:', error);
+  }
+}
+
+async function saveUserData(){
+  if(!currentUser) return;
+  try {
+    const { doc, updateDoc } = await import('https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js');
+    const userRef = doc(db, 'users', currentUser.uid);
+    await updateDoc(userRef, {
+      favorites: state.favorites,
+      seen: state.seen,
+      streak: state.streak,
+      name1: state.name1,
+      name2: state.name2,
+      hot: state.hot,
+      turns: state.turns,
+      updatedAt: new Date()
+    });
+  } catch(error) {
+    console.error('Erreur sauvegarde:', error);
+  }
+}
+
+/* ═══════════════════════════════════DATA — QUESTIONS
 ═══════════════════════════════════ */
 const MODES = [
   {
@@ -817,96 +1188,580 @@ const MODES = [
     desc:'Léger, spontané, sans prise de tête',
     color:'#A8C5A0',
     questions:[
-      {t:"Quel est ton film comfort que tu pourrais revoir à l'infini ?",i:1},
-      {t:"Si tu pouvais téléporter instantanément quelque part là maintenant, ce serait où ?",i:1},
-      {t:"Quel est le truc le plus inutile que tu saches faire et dont tu es secrètement fier·e ?",i:1},
-      {t:"C'est quoi ton repas de paresseux préféré quand tu ne veux vraiment pas cuisiner ?",i:1},
-      {t:"Si tu avais une journée entière pour toi, tu la passerais comment ?",i:1},
-      {t:"Quel est le dernier truc qui t'a vraiment fait rire ?",i:1},
-      {t:"Tu préfères les matins calmes ou les nuits tardives ?",i:1},
-      {t:"C'est quoi la chose que tu fais encore comme quand t'étais enfant ?",i:1},
-      {t:"Si tu pouvais avoir n'importe quel animal en mode apprivoisé, tu choisirais quoi ?",i:1},
-      {t:"Quel est ton ordre de priorité : café, douche, téléphone le matin ?",i:1},
-      {t:"C'est quoi le truc que tu achètes toujours mais dont tu n'as jamais vraiment besoin ?",i:1},
-      {t:"Si tu devais écouter un seul album pendant un mois, ce serait lequel ?",i:1},
-      {t:"Quel est le meilleur nom que tu aies donné à un objet chez toi ?",i:1},
-      {t:"Tu es plutôt : plan improvisé ou tout organisé à l'avance ?",i:1},
-      {t:"Quelle est la chose que tu fais systématiquement différemment de tout le monde ?",i:1},
-      {t:"Si tu pouvais maîtriser un talent instantanément, ce serait lequel ?",i:2},
-      {t:"C'est quoi ton péché mignon culinaire que tu assumes à moitié ?",i:1},
-      {t:"Quel est le livre ou la série qui t'a le plus marqué·e ces derniers temps ?",i:1},
-      {t:"Si ta vie avait une bande-son permanente, quel genre de musique ça serait ?",i:1},
-      {t:"C'est quoi la dernière bonne décision spontanée que tu as prise ?",i:1},
-      {t:"Tu es plutôt montagne, mer ou ville quand tu as besoin de souffler ?",i:1},
-      {t:"Si tu pouvais apprendre une langue du jour au lendemain, laquelle ?",i:1},
-      {t:"Quel est le truc que tu reportes depuis des semaines mais que tu n'arrives pas à faire ?",i:1},
-      {t:"C'est quoi la dernière chose qui t'a vraiment surpris·e en bien ?",i:1},
-      {t:"Si tu devais décrire ton style de vie en trois mots, ce seraient lesquels ?",i:1},
-      {t:"Quel est ton endroit préféré dans la maison pour ne rien faire ?",i:1},
-      {t:"C'est quoi le truc simple qui te met de bonne humeur à coup sûr ?",i:1},
-      {t:"Si tu organisais la soirée parfaite, elle ressemblerait à quoi ?",i:1},
-      {t:"Quel est le truc dont tu es incapable de te passer depuis que tu l'as découvert ?",i:1},
-      {t:"C'est quoi la chose que tu fais sans jamais t'ennuyer, même seul·e ?",i:1},
-    ]
+  {t:"Quel est ton snack de minuit préféré ?",i:1},
+  {t:"Si tu pouvais échanger ta journée avec quelqu'un, ce serait qui ?",i:1},
+  {t:"C'est quoi ton super-pouvoir inutile mais marrant ?",i:1},
+  {t:"Quel est le dernier meme qui t'a fait exploser de rire ?",i:1},
+  {t:"Si tu pouvais commander n'importe quoi gratos, tu prendrais quoi ?",i:1},
+  {t:"C'est quoi ton rituel bizarre avant de dormir ?",i:1},
+  {t:"Quel est ton emoji préféré et pourquoi ?",i:1},
+  {t:"Si tu étais un personnage de dessin animé, ce serait qui ?",i:1},
+  {t:"C'est quoi le plat que tu rates à chaque fois ?",i:1},
+  {t:"Quel est ton guilty pleasure musical ?",i:1},
+  {t:"Si tu pouvais sauter un repas pour toujours, ce serait lequel ?",i:1},
+  {t:"C'est quoi ton talent caché que personne ne soupçonne ?",i:1},
+  {t:"Quel est le dernier truc que tu as acheté impulsivement ?",i:1},
+  {t:"Si tu pouvais changer la météo aujourd'hui, ce serait quoi ?",i:1},
+  {t:"C'est quoi ton odeur préférée dans la vie ?",i:1},
+  {t:"Quel est ton jeu d'enfance que tu adores encore ?",i:1},
+  {t:"Si tu pouvais dîner avec une célébrité morte, ce serait qui ?",i:1},
+  {t:"C'est quoi le vêtement que tu portes jusqu'à la corde ?",i:1},
+  {t:"Quel est ton hack de vie le plus débile mais efficace ?",i:1},
+  {t:"Si tu étais un animal, quel serait ton cri ?",i:1},
+  {t:"C'est quoi ton film de Noël préféré, même en été ?",i:1},
+  {t:"Quel est le dernier podcast qui t'a accroché ?",i:1},
+  {t:"Si tu pouvais inventer une fête nationale, ce serait pour quoi ?",i:1},
+  {t:"C'est quoi ton duo de bonbons préféré ?",i:1},
+  {t:"Quel est ton sport que tu regardes mais ne fais jamais ?",i:1},
+  {t:"Si tu pouvais être invisible 1h, qu'est-ce que tu ferais ?",i:1},
+  {t:"C'est quoi ton filtre Snapchat préféré ?",i:1},
+  {t:"Quel est ton café (ou thé) signature ?",i:1},
+  {t:"Si tu pouvais fusionner deux aliments, ce serait quoi ?",i:1},
+  {t:"C'est quoi ton surnom d'enfance le plus ridicule ?",i:1},
+  {t:"Quel est ton niveau de propreté : bordélique ou maniaque ?",i:1},
+  {t:"Si tu pouvais avoir un majordome pour un jour, il ferait quoi ?",i:1},
+  {t:"C'est quoi ton parfum de glace oublié de l'enfance ?",i:1},
+  {t:"Quel est ton app que tu ouvres en premier le matin ?",i:1},
+  {t:"Si tu étais un superhéros, quel serait ton costume ?",i:1},
+  {t:"C'est quoi ton mot préféré à dire ?",i:1},
+  {t:"Quel est ton voyage imaginaire de rêve ?",i:1},
+  {t:"Si tu pouvais changer de nom pour un jour, ce serait quoi ?",i:1},
+  {t:"C'est quoi ton talent pour danser ?",i:1},
+  {t:"Quel est ton dessert que tu ferais 100 fois ?",i:1},
+  {t:"Si tu pouvais parler à ton futur toi, quelle question ?",i:1},
+  {t:"C'est quoi ton série-binge préférée ?",i:1},
+  {t:"Quel est ton gadget inutile mais adoré ?",i:1},
+  {t:"Si tu étais président 1 jour, premier décret ?",i:1},
+  {t:"C'est quoi ton niveau de karaoké ?",i:1},
+  {t:"Quel est ton fruit le plus détesté ?",i:1},
+  {t:"Si tu pouvais revivre une journée, ce serait laquelle ?",i:1},
+  {t:"C'est quoi ton signe astrologique secret ?",i:1},
+  {t:"Quel est ton hobby que tu as abandonné ?",i:1},
+  {t:"Si tu pouvais avoir un tatouage gratuit, où et quoi ?",i:1},
+  {t:"C'est quoi ton niveau de patience au supermarché ?",i:1},
+  {t:"Quel est ton livre d'enfance préféré ?",i:1},
+  {t:"Si tu pouvais être expert en un truc, ce serait quoi ?",i:1},
+  {t:"C'est quoi ton cocktail imaginaire ?",i:1},
+  {t:"Quel est ton animal totem ?",i:1},
+  {t:"Si tu pouvais sauter une corvée pour toujours, ce serait ?",i:1},
+  {t:"C'est quoi ton film guilty pleasure ?",i:1},
+  {t:"Quel est ton niveau de peur des araignées ?",i:1},
+  {t:"Si tu étais un pays, quel serait ton hymne ?",i:1},
+  {t:"C'est quoi ton plat de grand-mère préféré ?",i:1},
+  {t:"Quel est ton superpouvoir rêvé ?",i:1},
+  {t:"Si tu pouvais dîner avec un animal, ce serait qui ?",i:1},
+  {t:"C'est quoi ton réveil le plus violent ?",i:1},
+  {t:"Quel est ton jeu vidéo nostalgique ?",i:1},
+  {t:"Si tu pouvais changer une loi absurde, ce serait laquelle ?",i:1},
+  {t:"C'est quoi ton niveau de danse ?",i:1},
+  {t:"Quel est ton soda préféré ?",i:1},
+  {t:"Si tu étais un fruit, tu serais lequel ?",i:1},
+  {t:"C'est quoi ton talent culinaire surprise ?",i:1},
+  {t:"Quel est ton lieu de sieste idéal ?",i:1},
+  {t:"Si tu pouvais voler 1h, où irais-tu ?",i:1},
+  {t:"C'est quoi ton mot interdit ?",i:1},
+  {t:"Quel est ton parfum d'été ?",i:1},
+  {t:"Si tu pouvais être invisible, première cible ?",i:1},
+  {t:"C'est quoi ton niveau de chant sous la douche ?",i:1},
+  {t:"Quel est ton gadget futuriste rêvé ?",i:1},
+  {t:"Si tu étais un robot, quelle fonction ?",i:1},
+  {t:"C'est quoi ton niveau de peur du noir ?",i:1},
+  {t:"Quel est ton duo de films parfait ?",i:1},
+  {t:"Si tu pouvais manger un seul plat forever, ce serait ?",i:1},
+  {t:"C'est quoi ton hack sommeil ?",i:1},
+  {t:"Quel est ton animal de compagnie imaginaire ?",i:1},
+  {t:"Si tu étais un météorologue, quelle prédiction ?",i:1},
+  {t:"C'est quoi ton niveau de patience en embouteillage ?",i:1},
+  {t:"Quel est ton jeu de société préféré ?",i:1},
+  {t:"Si tu pouvais lire une pensée, ce serait celle de qui ?",i:1},
+  {t:"C'est quoi ton smoothie signature ?",i:1},
+  {t:"Quel est ton niveau de TikTok ?",i:1},
+  {t:"Si tu étais un super-vilain, quel plan ?",i:1},
+  {t:"C'est quoi ton niveau de bricolage ?",i:1},
+  {t:"Quel est ton parfum de bougie préféré ?",i:1},
+  {t:"Si tu pouvais ressusciter un objet, ce serait quoi ?",i:1},
+  {t:"C'est quoi ton niveau de jardinage ?",i:1},
+  {t:"Quel est ton voyage en train rêvé ?",i:1},
+  {t:"Si tu étais un chef, ton plat signature ?",i:1},
+  {t:"C'est quoi ton niveau de puzzle ?",i:1},
+  {t:"Quel est ton niveau de self-control face à un gâteau ?",i:1},
+  {t:"Si tu pouvais être un nuage, quelle forme ?",i:1},
+  {t:"Quel est ton plat que tu pourrais manger toute ta vie ?",i:1},
+{t:"Tu préfères le sucré ou le salé ?",i:1},
+{t:"Quel est ton endroit idéal pour te reposer ?",i:1},
+{t:"Quelle est ta saison préférée ?",i:1},
+{t:"Quel est ton réseau social préféré ?",i:1},
+{t:"Tu préfères regarder une série ou un film ?",i:1},
+{t:"Quel est ton hobby du moment ?",i:1},
+{t:"Tu es plutôt café ou thé ?",i:1},
+{t:"Quel est ton animal préféré ?",i:1},
+
+{t:"Quel est ton dernier fou rire ?",i:1},
+{t:"Quel est ton plus grand plaisir simple ?",i:1},
+{t:"Quel est ton endroit préféré pour sortir ?",i:1},
+{t:"Tu préfères les soirées calmes ou festives ?",i:1},
+{t:"Quel est ton style de musique préféré ?",i:1},
+{t:"Quel est ton artiste préféré ?",i:1},
+{t:"Quel est ton film préféré ?",i:1},
+{t:"Quel est ton souvenir d’enfance préféré ?",i:1},
+{t:"Quel est ton jeu préféré ?",i:1},
+{t:"Tu préfères mer ou montagne ?",i:1},
+
+{t:"Quel est ton rêve de voyage ?",i:1},
+{t:"Quel est ton fast-food préféré ?",i:1},
+{t:"Quel est ton dessert préféré ?",i:1},
+{t:"Quel est ton fruit préféré ?",i:1},
+{t:"Quel est ton légume préféré ?",i:1},
+{t:"Quel est ton sport préféré ?",i:1},
+{t:"Quel est ton sport que tu détestes ?",i:1},
+{t:"Tu préfères marcher ou rester chez toi ?",i:1},
+{t:"Quel est ton moment préféré en couple ?",i:1},
+{t:"Quel est ton endroit préféré avec moi ?",i:1},
+
+{t:"Quel est ton plus grand défaut ?",i:1},
+{t:"Quel est ta plus grande qualité ?",i:1},
+{t:"Quel est ton plus grand rêve ?",i:1},
+{t:"Quel est ton objectif actuel ?",i:1},
+{t:"Quel est ton film comfort ?",i:1},
+{t:"Quel est ton série du moment ?",i:1},
+{t:"Quel est ton pire film ?",i:1},
+{t:"Quel est ton meilleur souvenir récent ?",i:1},
+{t:"Quel est ton moment préféré avec tes amis ?",i:1},
+{t:"Quel est ton moment préféré seul ?",i:1},
+
+{t:"Quel est ton style vestimentaire ?",i:1},
+{t:"Quel est ton vêtement préféré ?",i:1},
+{t:"Quel est ton magasin préféré ?",i:1},
+{t:"Quel est ton parfum préféré ?",i:1},
+{t:"Quel est ton odeur préférée ?",i:1},
+{t:"Quel est ton moment préféré de la semaine ?",i:1},
+{t:"Quel est ton jour préféré ?",i:1},
+{t:"Quel est ton moment préféré de l’année ?",i:1},
+{t:"Quel est ton souvenir de vacances préféré ?",i:1},
+{t:"Quel est ton pays rêvé ?",i:1},
+
+{t:"Quel est ton plus gros achat inutile ?",i:1},
+{t:"Quel est ton objet préféré ?",i:1},
+{t:"Quel est ton gadget préféré ?",i:1},
+{t:"Quel est ton truc indispensable ?",i:1},
+{t:"Quel est ton moment préféré avec ta famille ?",i:1},
+{t:"Quel est ton souvenir préféré avec moi ?",i:1},
+{t:"Quel est ton moment le plus drôle ?",i:1},
+{t:"Quel est ton moment le plus gênant ?",i:1},
+{t:"Quel est ton moment le plus stressant ?",i:1},
+{t:"Quel est ton moment le plus relaxant ?",i:1},
+
+{t:"Quel est ton jeu vidéo préféré ?",i:1},
+{t:"Quel est ton personnage préféré ?",i:1},
+{t:"Quel est ton univers préféré ?",i:1},
+{t:"Quel est ton talent caché ?",i:1},
+{t:"Quel est ton truc inutile préféré ?",i:1},
+{t:"Quel est ton moment préféré de la journée avec moi ?",i:1},
+{t:"Quel est ton rêve secret ?",i:1},
+{t:"Quel est ton fantasme de voyage ?",i:1},
+{t:"Quel est ton lieu préféré ?",i:1},
+{t:"Quel est ton endroit safe ?",i:1},
+
+{t:"Quel est ton moment préféré pour manger ?",i:1},
+{t:"Quel est ton snack préféré ?",i:1},
+{t:"Quel est ton plaisir coupable ?",i:1},
+{t:"Quel est ton pire habitude ?",i:1},
+{t:"Quel est ton meilleure habitude ?",i:1},
+{t:"Quel est ton moment préféré du week-end ?",i:1},
+{t:"Quel est ton programme idéal ?",i:1},
+{t:"Quel est ton moment préféré avec moi en public ?",i:1},
+{t:"Quel est ton moment préféré en privé ?",i:1},
+{t:"Quel est ton moment préféré en soirée ?",i:1},
+
+{t:"Quel est ton moment préféré le matin ?",i:1},
+{t:"Quel est ton moment préféré le soir ?",i:1},
+{t:"Quel est ton rituel préféré ?",i:1},
+{t:"Quel est ton petit plaisir quotidien ?",i:1},
+{t:"Quel est ton moment préféré pour se détendre ?",i:1},
+{t:"Quel est ton endroit préféré pour réfléchir ?",i:1},
+{t:"Quel est ton moment préféré pour parler ?",i:1},
+{t:"Quel est ton moment préféré pour rigoler ?",i:1},
+{t:"Quel est ton moment préféré avec moi tout simplement ?",i:1},
+{t:"Quel est ton moment parfait ?",i:1}
+
+]
   },
   {
+  
     id:'prefer',emoji:'⚖️',name:'Tu préfères',
     desc:'Des choix impossibles, des révélations',
     color:'#9DB5C8',
     questions:[
-      {t:"Tu préfères voyager seul·e ou toujours avec quelqu'un ?",i:1},
-      {t:"Tu préfères recevoir un cadeau surprise ou choisir toi-même ?",i:1},
-      {t:"Tu préfères une soirée calme à deux ou une fête avec plein de monde ?",i:1},
-      {t:"Tu préfères être trop chaud·e ou trop froid·e ?",i:1},
-      {t:"Tu préfères toujours arriver en avance ou jamais être en retard mais juste à l'heure ?",i:1},
-      {t:"Tu préfères lire le livre ou regarder le film ?",i:2},
-      {t:"Tu préfères savoir à l'avance ce qui va se passer ou vivre dans la surprise totale ?",i:2},
-      {t:"Tu préfères une carrière qui te passionne moins bien payée, ou un job alimentaire très bien payé ?",i:2},
-      {t:"Tu préfères avoir raison ou être heureux·se ?",i:2},
-      {t:"Tu préfères une relation fusionnelle ou une relation avec beaucoup d'espace ?",i:2},
-      {t:"Tu préfères que les gens te disent la vérité même si ça fait mal, ou qu'on te protège un peu ?",i:2},
-      {t:"Tu préfères une maison à la campagne ou un appart en pleine ville ?",i:1},
-      {t:"Tu préfères travailler le matin très tôt ou le soir tard ?",i:1},
-      {t:"Tu préfères que le temps passe vite ou qu'il dure longtemps quand tu fais quelque chose ?",i:2},
-      {t:"Tu préfères faire un long voyage une fois par an ou des petits weekends souvent ?",i:1},
-      {t:"Tu préfères la mer en été ou la neige en hiver ?",i:1},
-      {t:"Tu préfères une vie simple et stable ou pleine de changements et d'aventures ?",i:2},
-      {t:"Tu préfères être trop occupé·e ou t'ennuyer un peu ?",i:1},
-      {t:"Tu préfères un repas gastronomique ou un repas du quotidien mais parfait ?",i:1},
-      {t:"Tu préfères qu'on te surprenne ou qu'on respecte scrupuleusement tes habitudes ?",i:1},
-      {t:"Tu préfères te souvenir de tout ou oublier facilement les mauvais moments ?",i:2},
-      {t:"Tu préfères une longue conversation de fond ou plein de petits échanges légers ?",i:2},
-      {t:"Tu préfères être très proche d'un cercle restreint ou avoir beaucoup de connaissances ?",i:1},
-      {t:"Tu préfères les débuts de relation ou la profondeur de ce qu'on construit avec le temps ?",i:2},
-      {t:"Tu préfères une journée sans smartphone ou une journée sans musique ?",i:1},
-    ]
+  {t:"Tu préfères manger la même chose tous les jours ou jamais manger la même chose ?",i:1},
+  {t:"Tu préfères être invisible ou lire les pensées ?",i:1},
+  {t:"Tu préfères vivre sans musique ou sans internet ?",i:1},
+  {t:"Tu préfères un job parfait mais loin de chez toi ou un job moyen près ?",i:1},
+  {t:"Tu préfères tout savoir de ton futur ou oublier ton passé ?",i:1},
+  {t:"Tu préfères être trop grand ou trop petit ?",i:1},
+  {t:"Tu préfères une vie riche mais courte ou pauvre mais longue ?",i:1},
+  {t:"Tu préfères parler toutes les langues ou jouer tous les instruments ?",i:1},
+  {t:"Tu préfères les chats ou les chiens ?",i:1},
+  {t:"Tu préfères le froid ou la chaleur ?",i:1},
+  {t:"Tu préfères voyager dans le temps ou dans l'espace ?",i:1},
+  {t:"Tu préfères être célèbre ou riche ?",i:1},
+  {t:"Tu préfères ne jamais mentir ou ne jamais être trompé ?",i:1},
+  {t:"Tu préfères un monde en noir et blanc ou sans son ?",i:1},
+  {t:"Tu préfères courir un marathon ou nager 10km ?",i:1},
+  {t:"Tu préfères tout se rappeler ou tout oublier ?",i:1},
+  {t:"Tu préfères être un génie ou un athlète ?",i:1},
+  {t:"Tu préfères vivre sans téléphone ou sans télé ?",i:1},
+  {t:"Tu préfères être aimé ou respecté ?",i:1},
+  {t:"Tu préfères sauter en parachute ou plonger en apnée ?",i:1},
+  {t:"Tu préfères la plage ou la montagne ?",i:1},
+  {t:"Tu préfères un tatouage ou un piercing ?",i:1},
+  {t:"Tu préfères Netflix ou YouTube ?",i:1},
+  {t:"Tu préfères dormir ou manger ?",i:1},
+  {t:"Tu préfères les surprises ou les plans ?",i:1},
+  {t:"Tu préfères le matin ou le soir ?",i:1},
+  {t:"Tu préfères les sucré ou salé ?",i:1},
+  {t:"Tu préfères lire ou regarder ?",i:1},
+  {t:"Tu préfères danser ou chanter ?",i:1},
+  {t:"Tu préfères l'hiver ou l'été ?",i:1},
+  {t:"Tu préfères les fêtes ou les dîners ?",i:1},
+  {t:"Tu préfères le café ou le thé ?",i:1},
+  {t:"Tu préfères les voyages ou les maisons ?",i:1},
+  {t:"Tu préfères les animaux ou les bébés ?",i:1},
+  {t:"Tu préfères les voitures ou les motos ?",i:1},
+  {t:"Tu préfères les livres papier ou ebook ?",i:1},
+  {t:"Tu préfères les pizzas ou les burgers ?",i:1},
+  {t:"Tu préfères les chaussures ou les sacs ?",i:1},
+  {t:"Tu préfères les séries ou les films ?",i:1},
+  {t:"Tu préfères les jeux vidéo ou les jeux de société ?",i:1},
+  {t:"Tu préfères les fruits ou les légumes ?",i:1},
+  {t:"Tu préfères les montres ou les bijoux ?",i:1},
+  {t:"Tu préfères les selfies ou les photos de groupe ?",i:1},
+  {t:"Tu préfères les matins ou les nuits ?",i:1},
+  {t:"Tu préfères les câlins ou les baisers ?",i:1},
+  {t:"Tu préfères les cadeaux ou les messages ?",i:1},
+  {t:"Tu préfères les voitures neuves ou d'occasion ?",i:1},
+  {t:"Tu préfères les lunettes ou les lentilles ?",i:1},
+  {t:"Tu préfères les stylos ou les crayons ?",i:1},
+  {t:"Tu préfères les jus ou les sodas ?",i:1},
+  {t:"Tu préfères les pochettes ou les gros sacs ?",i:1},
+  {t:"Tu préfères les baskets ou les talons ?",i:1},
+  {t:"Tu préfères les rouges ou les bleus ?",i:1},
+  {t:"Tu préfères les courts ou les longs voyages ?",i:1},
+  {t:"Tu préfères les solos ou les duos ?",i:1},
+  {t:"Tu préfères les surprises ou les routines ?",i:1},
+  {t:"Tu préfères les chauds ou les froids ?",i:1},
+  {t:"Tu préfères les anciens ou les nouveaux amis ?",i:1},
+  {t:"Tu préfères les matelas durs ou mous ?",i:1},
+  {t:"Tu préfères les oreillers ou les couvertures ?",i:1},
+  {t:"Tu préfères les fenêtres ouvertes ou fermées ?",i:1},
+  {t:"Tu préfères les lumières tamisées ou vives ?",i:1},
+  {t:"Tu préfères les chaussettes ou pieds nus ?",i:1},
+  {t:"Tu préfères les serviettes ou les peignoirs ?",i:1},
+{t:"Tu préfères vivre sans musique ou sans films ?",i:1},
+{t:"Tu préfères être riche mais seul·e ou pauvre mais entouré·e ?",i:2},
+{t:"Tu préfères tout planifier ou tout improviser ?",i:1},
+{t:"Tu préfères une relation passionnelle ou stable ?",i:2},
+{t:"Tu préfères dire tout ce que tu penses ou ne rien dire ?",i:2},
+{t:"Tu préfères voyager seul·e ou accompagné·e ?",i:1},
+{t:"Tu préfères une vie courte intense ou longue tranquille ?",i:2},
+{t:"Tu préfères être toujours en avance ou toujours en retard ?",i:1},
+{t:"Tu préfères ne plus dormir ou ne plus manger ?",i:2},
+{t:"Tu préfères vivre à la mer ou à la montagne ?",i:1},
+
+{t:"Tu préfères être invisible ou lire dans les pensées ?",i:2},
+{t:"Tu préfères ne plus avoir internet ou ne plus avoir téléphone ?",i:1},
+{t:"Tu préfères travailler de nuit ou de jour ?",i:1},
+{t:"Tu préfères tout savoir ou tout découvrir ?",i:2},
+{t:"Tu préfères être célèbre ou anonyme ?",i:1},
+{t:"Tu préfères aimer ou être aimé·e ?",i:2},
+{t:"Tu préfères une surprise ou tout prévoir ?",i:1},
+{t:"Tu préfères vivre en ville ou à la campagne ?",i:1},
+{t:"Tu préfères être très intelligent·e ou très drôle ?",i:1},
+{t:"Tu préfères tout réussir ou tout tenter ?",i:2},
+
+{t:"Tu préfères oublier le passé ou connaître le futur ?",i:2},
+{t:"Tu préfères être toujours occupé·e ou t’ennuyer parfois ?",i:1},
+{t:"Tu préfères un gros cadeau ou plein de petits ?",i:1},
+{t:"Tu préfères rester chez toi ou sortir ?",i:1},
+{t:"Tu préfères un amour intense court ou long paisible ?",i:2},
+{t:"Tu préfères être compris·e ou accepté·e ?",i:2},
+{t:"Tu préfères vivre sans stress ou sans responsabilité ?",i:2},
+{t:"Tu préfères réussir seul·e ou échouer accompagné·e ?",i:2},
+{t:"Tu préfères avoir toujours raison ou toujours apprendre ?",i:2},
+{t:"Tu préfères vivre dans le passé ou le futur ?",i:2},
+
+{t:"Tu préfères tout contrôler ou lâcher prise ?",i:2},
+{t:"Tu préfères une routine ou du changement ?",i:1},
+{t:"Tu préfères être admiré·e ou aimé·e ?",i:2},
+{t:"Tu préfères donner ou recevoir ?",i:2},
+{t:"Tu préfères parler ou écouter ?",i:1},
+{t:"Tu préfères vivre sans peur ou sans regret ?",i:2},
+{t:"Tu préfères perdre la mémoire ou ne plus apprendre ?",i:2},
+{t:"Tu préfères être seul·e tranquille ou entouré·e stressé·e ?",i:2},
+{t:"Tu préfères réussir tard ou échouer tôt ?",i:2},
+{t:"Tu préfères une vie simple ou luxueuse ?",i:1},
+
+{t:"Tu préfères vivre sans amour ou sans amis ?",i:3},
+{t:"Tu préfères tout dire ou protéger les autres ?",i:2},
+{t:"Tu préfères être libre ou sécurisé·e ?",i:2},
+{t:"Tu préfères vivre sans émotions ou trop d’émotions ?",i:3},
+{t:"Tu préfères être toujours honnête ou parfois mentir ?",i:2},
+{t:"Tu préfères suivre ton cœur ou ta raison ?",i:2},
+{t:"Tu préfères aimer sans retour ou ne jamais aimer ?",i:3},
+{t:"Tu préfères être pardonné·e ou pardonner ?",i:2},
+{t:"Tu préfères être proche de peu de gens ou distant avec beaucoup ?",i:1},
+{t:"Tu préfères vivre dans un rêve ou la réalité ?",i:2},
+
+{t:"Tu préfères un futur certain ou incertain ?",i:2},
+{t:"Tu préfères tout perdre ou ne jamais tenter ?",i:3},
+{t:"Tu préfères être fort·e ou sensible ?",i:2},
+{t:"Tu préfères comprendre ou ressentir ?",i:2},
+{t:"Tu préfères être indépendant·e ou fusionnel·le ?",i:2},
+{t:"Tu préfères un grand amour ou plusieurs histoires ?",i:2},
+{t:"Tu préfères être rassuré·e ou challengé·e ?",i:2},
+{t:"Tu préfères vivre vite ou lentement ?",i:1},
+{t:"Tu préfères être surpris·e ou préparer ?",i:1},
+{t:"Tu préfères construire ou profiter ?",i:2},
+
+{t:"Tu préfères être spontané·e ou réfléchi·e ?",i:1},
+{t:"Tu préfères dire oui ou dire non ?",i:1},
+{t:"Tu préfères vivre pour toi ou pour les autres ?",i:2},
+{t:"Tu préfères rester ou partir ?",i:2},
+{t:"Tu préfères attendre ou agir ?",i:1},
+{t:"Tu préfères croire ou savoir ?",i:2},
+{t:"Tu préfères être passionné·e ou raisonnable ?",i:2},
+{t:"Tu préfères aimer fort ou doucement ?",i:2},
+{t:"Tu préfères une vie stable ou imprévisible ?",i:2},
+{t:"Tu préfères te souvenir de tout ou oublier facilement ?",i:2},
+
+{t:"Tu préfères une relation calme ou intense ?",i:2},
+{t:"Tu préfères être rassuré·e ou libre ?",i:2},
+{t:"Tu préfères partager ou garder pour toi ?",i:1},
+{t:"Tu préfères vivre un rêve ou construire ta vie ?",i:2},
+{t:"Tu préfères être guidé·e ou guider ?",i:1},
+{t:"Tu préfères aimer ou être aimé·e plus ?",i:2},
+{t:"Tu préfères vivre sans peur ou sans doute ?",i:2},
+{t:"Tu préfères être heureux·se maintenant ou plus tard ?",i:2},
+{t:"Tu préfères un moment parfait ou plein de petits bons moments ?",i:1},
+{t:"Tu préfères une grande surprise ou une petite attention ?",i:1},
+
+{t:"Tu préfères rester le même ou évoluer ?",i:2},
+{t:"Tu préfères suivre les règles ou les casser ?",i:1},
+{t:"Tu préfères être compris·e immédiatement ou avec le temps ?",i:2},
+{t:"Tu préfères vivre une seule grande histoire ou plusieurs belles ?",i:2},
+{t:"Tu préfères ressentir trop ou pas assez ?",i:3},
+{t:"Tu préfères donner tout ou garder un peu ?",i:2},
+{t:"Tu préfères aimer quelqu’un imparfait ou attendre le parfait ?",i:2},
+{t:"Tu préfères tout partager ou garder des secrets ?",i:2},
+{t:"Tu préfères vivre avec regrets ou sans avoir tenté ?",i:3},
+{t:"Tu préfères être toi-même ou plaire aux autres ?",i:2}
+
+  ]
   },
+  
   {
     id:'who',emoji:'👫',name:'Qui de nous deux',
     desc:'Se comparer avec tendresse',
     color:'#C8B09D',
     questions:[
-      {t:"Qui de nous deux est le plus organisé·e ?",i:1},
-      {t:"Qui de nous deux prend les meilleures photos ?",i:1},
-      {t:"Qui de nous deux est le plus têtu·e ?",i:1},
-      {t:"Qui de nous deux s'adapte le mieux aux imprévus ?",i:1},
-      {t:"Qui de nous deux est le plus à l'aise en société ?",i:1},
-      {t:"Qui de nous deux est le plus romantique au quotidien ?",i:2},
-      {t:"Qui de nous deux est le plus courageux·se face à ses peurs ?",i:2},
-      {t:"Qui de nous deux a le plus de patience ?",i:1},
-      {t:"Qui de nous deux serait le meilleur·e chef en cuisine de survie ?",i:1},
-      {t:"Qui de nous deux est le plus nostalgique ?",i:1},
-      {t:"Qui de nous deux se souvient de plus de détails sur notre histoire ?",i:2},
-      {t:"Qui de nous deux rit le plus facilement ?",i:1},
-      {t:"Qui de nous deux se bat le moins contre son téléphone ?",i:1},
-      {t:"Qui de nous deux fait les meilleurs câlins ?",i:1},
-      {t:"Qui de nous deux est le plus optimiste quand les choses vont mal ?",i:2},
-      {t:"Qui de nous deux dit 'je t'aime' en premier d'habitude ?",i:2},
-      {t:"Qui de nous deux serait le plus capable de vivre sans l'autre une semaine sans craquer ?",i:2},
-      {t:"Qui de nous deux est le plus facile à lire dans ses émotions ?",i:2},
-      {t:"Qui de nous deux est le meilleur·e pour garder un secret ?",i:1},
-      {t:"Qui de nous deux a le meilleur sens de l'humour ?",i:1},
-    ]
+  {t:"Qui de nous deux remarque le plus vite quand l'autre ne va pas vraiment bien ?",i:2},
+  {t:"Qui de nous deux propose le plus souvent des plans au dernier moment ?",i:1},
+  {t:"Qui de nous deux met le plus de temps à choisir quoi manger ?",i:1},
+  {t:"Qui de nous deux est le plus capable de transformer une petite galère en fou rire ?",i:1},
+  {t:"Qui de nous deux est le plus susceptible de lancer une discussion profonde à une heure absurde ?",i:2},
+  {t:"Qui de nous deux est le plus difficile à réveiller ?",i:1},
+  {t:"Qui de nous deux capte le plus de détails que l'autre oublie complètement ?",i:1},
+  {t:"Qui de nous deux fait le plus facilement semblant que “ça va” quand ce n'est pas totalement vrai ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à envoyer un message juste pour dire un truc inutile mais drôle ?",i:1},
+  {t:"Qui de nous deux a le plus de mal à s'arrêter quand il ou elle commence à raconter une anecdote ?",i:1},
+  {t:"Qui de nous deux serait le plus capable d'organiser un weekend entier sans rien oublier ?",i:1},
+  {t:"Qui de nous deux est le plus spontané quand il s'agit de faire plaisir à l'autre ?",i:2},
+  {t:"Qui de nous deux s'attache le plus aux petits objets ou souvenirs ?",i:1},
+  {t:"Qui de nous deux a le plus tendance à trop réfléchir avant de répondre à quelque chose d'important ?",i:2},
+  {t:"Qui de nous deux pardonne le plus vite après une tension ?",i:2},
+  {t:"Qui de nous deux devine le mieux ce que l'autre pense sans qu'il y ait besoin de parler ?",i:2},
+  {t:"Qui de nous deux serait le plus à l'aise dans une soirée où il ne connaît presque personne ?",i:1},
+  {t:"Qui de nous deux crée le plus facilement une ambiance douce juste avec sa présence ?",i:2},
+  {t:"Qui de nous deux est le plus têtu quand il pense avoir raison ?",i:1},
+  {t:"Qui de nous deux est le plus susceptible de rire dans un moment où il faudrait rester sérieux ?",i:1},
+  {t:"Qui de nous deux est le plus rassurant quand l'autre doute ?",i:2},
+  {t:"Qui de nous deux remarque le plus les changements d'humeur de l'autre ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de vivre une journée entière sans téléphone ?",i:1},
+  {t:"Qui de nous deux a le plus de patience quand quelque chose prend du temps ?",i:1},
+  {t:"Qui de nous deux serait le plus à l'aise pour improviser un discours devant du monde ?",i:1},
+  {t:"Qui de nous deux transforme le plus vite un moment banal en souvenir marquant ?",i:2},
+  {t:"Qui de nous deux est le plus sensible à une chanson, une phrase ou une ambiance ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à vouloir tout régler tout de suite ?",i:2},
+  {t:"Qui de nous deux aurait le plus de mal à cacher qu'il est jaloux ?",i:2},
+  {t:"Qui de nous deux fait le plus attention aux petits détails quand il prépare quelque chose pour l'autre ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à trop en faire pour être sûr que tout soit bien ?",i:1},
+  {t:"Qui de nous deux serait le plus capable de partir à l'aventure sur un coup de tête ?",i:1},
+  {t:"Qui de nous deux exprime le plus facilement son affection au quotidien ?",i:2},
+  {t:"Qui de nous deux est le plus difficile à convaincre quand il a une idée en tête ?",i:1},
+  {t:"Qui de nous deux a le plus tendance à repenser longtemps à une discussion importante ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à garder un détail dans un coin de sa tête pendant des mois ?",i:1},
+  {t:"Qui de nous deux se met le plus facilement la pression tout seul ?",i:2},
+  {t:"Qui de nous deux aurait le plus de chances de pleurer devant un film sans l'avouer tout de suite ?",i:2},
+  {t:"Qui de nous deux est le plus capable de rester calme dans un imprévu ?",i:1},
+  {t:"Qui de nous deux est le plus attaché aux habitudes de nous deux ?",i:2},
+  {t:"Qui de nous deux serait le plus à l'aise pour prendre soin de l'autre quand il est malade ?",i:2},
+  {t:"Qui de nous deux fait le plus souvent passer l'autre avant lui ou elle sans même s'en rendre compte ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à observer avant de parler ?",i:1},
+  {t:"Qui de nous deux est le plus susceptible d'avoir une intuition juste sur une personne ?",i:1},
+  {t:"Qui de nous deux aurait le plus de mal à faire semblant s'il était vexé ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à vouloir immortaliser un moment en photo ou vidéo ?",i:1},
+  {t:"Qui de nous deux se souvient le mieux des dates, périodes ou petites étapes de notre histoire ?",i:2},
+  {t:"Qui de nous deux donne le plus envie à l'autre de se confier ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de s'endormir n'importe où ?",i:1},
+  {t:"Qui de nous deux a le plus tendance à faire durer une discussion juste pour être sûr que tout soit clair ?",i:2},
+  {t:"Qui de nous deux est le plus facilement émerveillé par quelque chose de simple ?",i:1},
+  {t:"Qui de nous deux est le plus du genre à préparer une surprise discrètement ?",i:2},
+  {t:"Qui de nous deux remarque le plus vite quand l'autre a besoin d'un câlin plutôt que d'un conseil ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de tenir une promesse coûte que coûte ?",i:2},
+  {t:"Qui de nous deux a le plus de mal à dire non ?",i:2},
+  {t:"Qui de nous deux est le plus joueur dans le quotidien ?",i:1},
+  {t:"Qui de nous deux serait le plus à l'aise pour défendre l'autre devant quelqu'un ?",i:2},
+  {t:"Qui de nous deux est le plus susceptible de tomber amoureux encore plus fort avec le temps ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à se réfugier dans l'humour quand il est touché ?",i:2},
+  {t:"Qui de nous deux est le plus capable de sentir quand un silence est beau plutôt que gênant ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de vivre une soirée parfaite sans rien de spécial, juste ensemble ?",i:1},
+  {t:"Qui de nous deux est le plus du genre à trop porter pour éviter de déranger l'autre ?",i:3},
+  {t:"Qui de nous deux sait le mieux calmer une situation tendue ?",i:2},
+  {t:"Qui de nous deux est le plus sincère même quand la vérité est un peu inconfortable ?",i:2},
+  {t:"Qui de nous deux a le plus tendance à idéaliser certains souvenirs ?",i:2},
+  {t:"Qui de nous deux ferait le plus facilement un long message touchant à l'autre ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à observer l'autre avec tendresse sans rien dire ?",i:2},
+  {t:"Qui de nous deux est le plus susceptible de proposer un projet à deux juste parce que l'idée lui fait plaisir ?",i:1},
+  {t:"Qui de nous deux serait le plus à l'aise pour recommencer ailleurs si on devait repartir de zéro ?",i:2},
+  {t:"Qui de nous deux est le plus attaché à l'idée de “nous” dans les petits détails du quotidien ?",i:2},
+  {t:"Qui de nous deux a le plus de mal à cacher quand il est touché par quelque chose de doux ?",i:2},
+  {t:"Qui de nous deux est le plus capable de rester présent même quand il ne sait pas quoi dire ?",i:3},
+  {t:"Qui de nous deux serait le plus triste si on perdait certaines de nos habitudes ensemble ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à faire passer ses émotions par des gestes plutôt que par des mots ?",i:2},
+  {t:"Qui de nous deux est le plus facile à faire rire quand l'ambiance est lourde ?",i:1},
+  {t:"Qui de nous deux serait le plus capable d'écrire quelque chose de beau sur notre histoire ?",i:2},
+  {t:"Qui de nous deux a le plus besoin de se sentir rassuré parfois sans forcément le demander ?",i:3},
+  {t:"Qui de nous deux est le plus du genre à chercher la paix plutôt que d'avoir le dernier mot ?",i:2},
+  {t:"Qui de nous deux est le plus sensible au regard de l'autre ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de reconnaître ses torts rapidement ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à aimer très fort mais discrètement ?",i:2},
+  {t:"Qui de nous deux aurait le plus de mal à faire comme si l'autre ne lui manquait pas ?",i:2},
+  {t:"Qui de nous deux est le plus susceptible de lancer un “tu te souviens ?” sorti de nulle part ?",i:1},
+  {t:"Qui de nous deux est le plus protecteur sans être possessif ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de tout quitter pour suivre quelque chose qui lui semble juste ?",i:3},
+  {t:"Qui de nous deux est le plus du genre à se remettre en question après une dispute ?",i:3},
+  {t:"Qui de nous deux a le plus souvent besoin de proximité pour se sentir vraiment bien ?",i:2},
+  {t:"Qui de nous deux remarque le plus quand quelque chose a changé entre nous, même légèrement ?",i:3},
+  {t:"Qui de nous deux est le plus capable d'aimer les côtés compliqués de l'autre sans vouloir les corriger ?",i:3},
+  {t:"Qui de nous deux serait le plus à l'aise pour parler de notre futur à long terme ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à exprimer l'amour dans les actes invisibles ?",i:2},
+  {t:"Qui de nous deux est le plus difficile à quitter après un moment à deux, même pour peu de temps ?",i:2},
+  {t:"Qui de nous deux garde le plus certaines phrases de l'autre en tête pendant longtemps ?",i:2},
+  {t:"Qui de nous deux est le plus du genre à vouloir comprendre plutôt que juger ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de reconstruire un lien après une période compliquée ?",i:3},
+  {t:"Qui de nous deux aime le plus la version de lui ou elle-même qu'il ou elle devient dans notre relation ?",i:3},
+  {t:"Qui de nous deux est le plus du genre à aimer intensément dans le silence ?",i:2},
+  {t:"Qui de nous deux serait le plus capable de dire “reste encore un peu” sans utiliser ces mots-là ?",i:2},
+  {t:"Qui de nous deux sent le plus fort quand un moment est précieux pendant qu'il est en train d'arriver ?",i:2},
+{t:"Qui de nous deux oublie le plus souvent ses affaires ?",i:1},
+{t:"Qui de nous deux parle le plus en dormant ?",i:1},
+{t:"Qui de nous deux met le plus de temps à répondre aux messages ?",i:1},
+{t:"Qui de nous deux est le plus gourmand ?",i:1},
+{t:"Qui de nous deux procrastine le plus ?",i:1},
+{t:"Qui de nous deux a le plus de mal à dire au revoir ?",i:2},
+{t:"Qui de nous deux est le plus susceptible de faire une sieste imprévue ?",i:1},
+{t:"Qui de nous deux chante le plus faux ?",i:1},
+{t:"Qui de nous deux est le plus bordélique ?",i:1},
+{t:"Qui de nous deux vérifie son téléphone le plus souvent ?",i:1},
+
+{t:"Qui de nous deux a le plus d’imagination ?",i:1},
+{t:"Qui de nous deux est le plus tête en l’air ?",i:1},
+{t:"Qui de nous deux rigole le plus pour rien ?",i:1},
+{t:"Qui de nous deux est le plus gourmand tard le soir ?",i:1},
+{t:"Qui de nous deux dépense le plus facilement ?",i:1},
+{t:"Qui de nous deux est le plus du genre à rêvasser ?",i:1},
+{t:"Qui de nous deux a le plus d’énergie le matin ?",i:1},
+{t:"Qui de nous deux est le plus lent pour se préparer ?",i:1},
+{t:"Qui de nous deux parle le plus quand il est stressé ?",i:2},
+{t:"Qui de nous deux garde le plus ses émotions pour lui ?",i:2},
+
+{t:"Qui de nous deux est le plus susceptible d’oublier une date importante ?",i:1},
+{t:"Qui de nous deux fait le plus de blagues nulles ?",i:1},
+{t:"Qui de nous deux est le plus susceptible de rire au mauvais moment ?",i:1},
+{t:"Qui de nous deux a le plus de mal à rester concentré ?",i:1},
+{t:"Qui de nous deux aime le plus les surprises ?",i:1},
+{t:"Qui de nous deux déteste le plus attendre ?",i:1},
+{t:"Qui de nous deux est le plus susceptible de perdre quelque chose ?",i:1},
+{t:"Qui de nous deux est le plus impatient ?",i:1},
+{t:"Qui de nous deux aime le plus rester à la maison ?",i:1},
+{t:"Qui de nous deux propose le plus souvent de sortir ?",i:1},
+
+{t:"Qui de nous deux est le plus du genre à faire des compliments ?",i:2},
+{t:"Qui de nous deux remarque le plus les petits détails physiques ?",i:2},
+{t:"Qui de nous deux est le plus tactile ?",i:2},
+{t:"Qui de nous deux a le plus besoin d’attention ?",i:2},
+{t:"Qui de nous deux est le plus expressif avec ses émotions ?",i:2},
+{t:"Qui de nous deux a le plus de mal à s’excuser ?",i:2},
+{t:"Qui de nous deux pardonne le plus difficilement ?",i:2},
+{t:"Qui de nous deux a le plus besoin de réassurance ?",i:2},
+{t:"Qui de nous deux est le plus sensible aux mots ?",i:2},
+{t:"Qui de nous deux montre le plus son amour au quotidien ?",i:2},
+
+{t:"Qui de nous deux est le plus créatif ?",i:1},
+{t:"Qui de nous deux aime le plus tester de nouvelles choses ?",i:1},
+{t:"Qui de nous deux est le plus organisé dans sa vie ?",i:1},
+{t:"Qui de nous deux aime le plus planifier ?",i:1},
+{t:"Qui de nous deux est le plus impulsif ?",i:1},
+{t:"Qui de nous deux réfléchit le plus avant d’agir ?",i:1},
+{t:"Qui de nous deux prend le plus de décisions ?",i:1},
+{t:"Qui de nous deux doute le plus de lui ?",i:2},
+{t:"Qui de nous deux est le plus confiant ?",i:1},
+{t:"Qui de nous deux a le plus d’ambition ?",i:1},
+
+{t:"Qui de nous deux est le plus calme ?",i:1},
+{t:"Qui de nous deux s’énerve le plus vite ?",i:1},
+{t:"Qui de nous deux garde le plus son sang-froid ?",i:1},
+{t:"Qui de nous deux a le plus d’humour ?",i:1},
+{t:"Qui de nous deux est le plus sarcastique ?",i:1},
+{t:"Qui de nous deux est le plus gentil ?",i:1},
+{t:"Qui de nous deux est le plus protecteur ?",i:2},
+{t:"Qui de nous deux est le plus rassurant ?",i:2},
+{t:"Qui de nous deux écoute le mieux ?",i:2},
+{t:"Qui de nous deux donne les meilleurs conseils ?",i:2},
+
+{t:"Qui de nous deux est le plus sportif ?",i:1},
+{t:"Qui de nous deux est le plus paresseux ?",i:1},
+{t:"Qui de nous deux mange le plus ?",i:1},
+{t:"Qui de nous deux dort le plus ?",i:1},
+{t:"Qui de nous deux a le plus de motivation ?",i:1},
+{t:"Qui de nous deux abandonne le plus vite ?",i:1},
+{t:"Qui de nous deux tient le plus ses objectifs ?",i:1},
+{t:"Qui de nous deux aime le plus apprendre ?",i:1},
+{t:"Qui de nous deux est le plus curieux ?",i:1},
+{t:"Qui de nous deux pose le plus de questions ?",i:1},
+
+{t:"Qui de nous deux est le plus romantique ?",i:2},
+{t:"Qui de nous deux fait le plus d’efforts dans la relation ?",i:2},
+{t:"Qui de nous deux montre le plus d’attention ?",i:2},
+{t:"Qui de nous deux pense le plus à l’autre ?",i:2},
+{t:"Qui de nous deux a le plus besoin de moments à deux ?",i:2},
+{t:"Qui de nous deux aime le plus les câlins ?",i:2},
+{t:"Qui de nous deux a le plus de gestes tendres ?",i:2},
+{t:"Qui de nous deux fait le plus sourire l’autre ?",i:2},
+{t:"Qui de nous deux est le plus attaché ?",i:2},
+{t:"Qui de nous deux tomberait le plus vite amoureux ?",i:2},
+
+{t:"Qui de nous deux est le plus jaloux ?",i:2},
+{t:"Qui de nous deux a le plus confiance ?",i:2},
+{t:"Qui de nous deux est le plus honnête ?",i:2},
+{t:"Qui de nous deux dit le plus souvent la vérité même quand c’est dur ?",i:2},
+{t:"Qui de nous deux cache le plus ses pensées ?",i:2},
+{t:"Qui de nous deux est le plus mystérieux ?",i:2},
+{t:"Qui de nous deux se livre le plus facilement ?",i:2},
+{t:"Qui de nous deux est le plus ouvert ?",i:2},
+{t:"Qui de nous deux est le plus transparent ?",i:2},
+{t:"Qui de nous deux comprend le mieux l’autre ?",i:3}
+
+]
   },
   {
     id:'memories',emoji:'📸',name:'Souvenirs',
@@ -933,83 +1788,529 @@ const MODES = [
       {t:"Il y a une soirée particulière avec nous deux que tu refaisais demain sans hésiter ?",i:2},
       {t:"C'est quoi un moment du quotidien de nous deux qui te manquerait si tu le perdais ?",i:3},
       {t:"Quel est le premier truc que tu as remarqué chez moi — pas physiquement ?",i:2},
-    ]
+  {t:"Tu te souviens de la première fois qu'on a vraiment parlé de quelque chose de profond ?",i:2},
+  {t:"Quel est le petit détail de notre première rencontre que tu revois souvent dans ta tête ?",i:2},
+  {t:"Il y a un moment où tu m'as vu sous un jour complètement nouveau ?",i:2},
+  {t:"C'est quoi la fois où on a eu un silence complice qui a duré longtemps ?",i:2},
+  {t:"Tu te rappelles la première dispute qui s'est finie en fou rire ?",i:1},
+  {t:"Quel est le souvenir où tu t'es dit “cette personne me comprend vraiment” ?",i:3},
+  {t:"Il y a un endroit où on est allés qui te fait sourire dès que tu y repenses ?",i:2},
+  {t:"C'est quoi la première fois que tu as eu envie de me protéger ?",i:2},
+  {t:"Tu te souviens de ce que je portais quand tu m'as vu pour la première fois ?",i:2},
+  {t:"Quel est le moment où tu t'es senti vraiment fier de nous sans le dire ?",i:3},
+  {t:"Il y a une phrase que je t'ai dite qui te revient parfois sans raison ?",i:2},
+  {t:"C'est quoi la première fois qu'on a vraiment ri ensemble d'un truc absurde ?",i:1},
+  {t:"Tu te rappelles notre premier long trajet ensemble ?",i:2},
+  {t:"Quel est le souvenir où tu t'es dit qu'on était vraiment différents mais que ça marchait ?",i:2},
+  {t:"Il y a un moment où tu m'as vu vulnérable et que ça t'a touché ?",i:3},
+  {t:"C'est quoi la première fois que tu t'es dit que tu pouvais te confier à moi ?",i:2},
+  {t:"Tu te souviens du premier repas qu'on a cuisiné ensemble ?",i:1},
+  {t:"Quel est le moment où on a traversé quelque chose de dur et qu'on en est sortis plus proches ?",i:3},
+  {t:"Il y a une chanson qu'on a écoutée ensemble qui te ramène toujours à nous ?",i:2},
+  {t:"C'est quoi la première fois que tu m'as vu comme “ton” quelqu'un ?",i:2},
+  {t:"Tu te rappelles la première fois qu'on s'est tenu la main sans réfléchir ?",i:2},
+  {t:"Quel est le souvenir où tu t'es senti le plus léger avec moi ?",i:1},
+  {t:"Il y a un endroit banal qui est devenu spécial juste à cause de nous ?",i:2},
+  {t:"C'est quoi la première fois qu'on a pleuré ensemble de rire ?",i:1},
+  {t:"Tu te souviens de ce que tu pensais de moi avant même qu'on se parle ?",i:2},
+  {t:"Quel est le moment où tu t'es dit qu'on avait vraiment de la chance ?",i:2},
+  {t:"Il y a une soirée où tu aimerais revenir juste pour revivre l'ambiance ?",i:2},
+  {t:"C'est quoi la première fois que tu m'as vu comme quelqu'un d'essentiel ?",i:3},
+  {t:"Tu te rappelles notre première attente ensemble, comme à un arrêt de bus ?",i:1},
+  {t:"Quel est le souvenir où tu t'es senti vraiment vu par moi ?",i:3},
+  {t:"Il y a un message que je t'ai envoyé qui te fait encore sourire ?",i:2},
+  {t:"C'est quoi la première fois qu'on a parlé jusqu'à pas d'heure ?",i:2},
+  {t:"Tu te souviens du premier cadeau qu'on s'est fait, même minuscule ?",i:2},
+  {t:"Quel est le moment où tu t'as réalisé que je te comprenais sans effort ?",i:3},
+  {t:"Il y a une photo de nous que tu regardes parfois en secret ?",i:2},
+  {t:"C'est quoi la première fois qu'on s'est disputé pour une bêtise ?",i:1},
+  {t:"Tu te rappelles notre premier silence gêné qui s'est transformé en quelque chose de beau ?",i:2},
+  {t:"Quel est le souvenir où tu t'es dit que notre histoire était particulière ?",i:3},
+  {t:"Il y a un parfum ou une odeur qui te ramène à un moment précis avec moi ?",i:2},
+  {t:"C'est quoi la première fois que tu m'as vu faire quelque chose qui t'a surpris en bien ?",i:1},
+  {t:"Tu te souviens de notre premier “on fait comme si c'était normal” ?",i:1},
+  {t:"Quel est le moment où tu t'es senti vraiment en sécurité avec moi ?",i:3},
+  {t:"Il y a une habitude qu'on a prise ensemble sans s'en rendre compte ?",i:2},
+  {t:"C'est quoi la première fois que tu m'as dit un truc que tu n'avais jamais dit à personne ?",i:3},
+  {t:"Tu te rappelles le premier regard qu'on s'est échangé sans rien dire ?",i:2},
+  {t:"Quel est le souvenir où tu t'es dit que je valais le coup d'attendre ?",i:2},
+  {t:"Il y a un film ou une série qu'on a vue ensemble qui a marqué quelque chose ?",i:1},
+  {t:"C'est quoi la première fois qu'on s'est rassuré mutuellement ?",i:2},
+  {t:"Tu te souviens de notre première attente impatiente de se revoir ?",i:2},
+  {t:"Quel est le moment où tu t'as réalisé que je faisais partie de ton quotidien ?",i:2},
+  {t:"Il y a un chemin ou un trajet qu'on a fait qui t'a marqué ?",i:2},
+  {t:"C'est quoi la première fois que tu m'as vu comme quelqu'un sur qui compter ?",i:2},
+{t:"Quel est le premier moment où tu t'es senti vraiment à l’aise avec moi ?",i:2},
+{t:"Quelle est la première chose qui t’a rassuré chez moi ?",i:2},
+{t:"Quel souvenir avec moi te fait sourire sans raison ?",i:1},
+{t:"Quel est le premier moment où tu t’es dit qu’on avait une vraie connexion ?",i:2},
+{t:"Quel souvenir avec moi te semble presque irréel tellement il était bien ?",i:2},
+{t:"Quel moment simple avec moi t’a marqué plus que prévu ?",i:1},
+{t:"Quelle est la première fois où tu as eu confiance en moi instinctivement ?",i:2},
+{t:"Quel souvenir te fait penser qu’on était “alignés” sans parler ?",i:2},
+{t:"Quel moment avec moi t’a surpris par sa simplicité ?",i:1},
+{t:"Quel souvenir te donne envie de ralentir et juste profiter ?",i:2},
+
+{t:"Quel est le premier moment où tu as ressenti du manque ?",i:2},
+{t:"Quel souvenir avec moi t’a fait sentir compris·e ?",i:2},
+{t:"Quel moment où on ne faisait rien reste important pour toi ?",i:1},
+{t:"Quel souvenir avec moi te fait te sentir chanceux·se ?",i:2},
+{t:"Quel moment avec moi t’a apaisé sans que je fasse grand-chose ?",i:2},
+{t:"Quel souvenir te donne envie de revivre exactement la même ambiance ?",i:2},
+{t:"Quel moment avec moi t’a semblé hors du temps ?",i:2},
+{t:"Quel souvenir t’a fait voir notre relation différemment ?",i:3},
+{t:"Quel moment t’a donné envie de construire quelque chose avec moi ?",i:3},
+{t:"Quel souvenir te fait dire “c’était nous, à 100%” ?",i:2},
+
+{t:"Quel moment avec moi t’a fait te sentir important·e ?",i:2},
+{t:"Quel souvenir te fait réaliser à quel point on a évolué ?",i:3},
+{t:"Quel moment avec moi t’a marqué sans raison particulière ?",i:1},
+{t:"Quel souvenir t’a fait penser “ça vaut le coup” ?",i:2},
+{t:"Quel moment avec moi t’a donné de l’énergie ?",i:1},
+{t:"Quel souvenir te fait te sentir en sécurité ?",i:3},
+{t:"Quel moment avec moi t’a fait oublier le reste du monde ?",i:2},
+{t:"Quel souvenir t’a donné envie de rester plus longtemps avec moi ?",i:2},
+{t:"Quel moment avec moi t’a semblé naturel dès le début ?",i:1},
+{t:"Quel souvenir te fait dire qu’on s’est bien trouvés ?",i:2},
+
+{t:"Quel moment avec moi t’a donné envie de parler pendant des heures ?",i:2},
+{t:"Quel souvenir t’a fait sentir proche de moi sans contact ?",i:2},
+{t:"Quel moment avec moi t’a fait réfléchir sur toi ?",i:3},
+{t:"Quel souvenir t’a fait réaliser que tu pouvais être toi-même ?",i:3},
+{t:"Quel moment avec moi t’a surpris émotionnellement ?",i:2},
+{t:"Quel souvenir t’a marqué par son calme ?",i:1},
+{t:"Quel moment avec moi t’a fait te sentir léger·e ?",i:1},
+{t:"Quel souvenir t’a fait comprendre qu’on était compatibles ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir écouté·e ?",i:2},
+{t:"Quel souvenir t’a donné envie de me connaître encore plus ?",i:2},
+
+{t:"Quel moment avec moi t’a marqué par sa spontanéité ?",i:1},
+{t:"Quel souvenir t’a fait te dire “c’est différent” ?",i:2},
+{t:"Quel moment avec moi t’a semblé parfait sans effort ?",i:2},
+{t:"Quel souvenir t’a fait ressentir de la gratitude ?",i:2},
+{t:"Quel moment avec moi t’a fait sourire longtemps après ?",i:1},
+{t:"Quel souvenir t’a marqué par son intensité ?",i:2},
+{t:"Quel moment avec moi t’a donné confiance en nous ?",i:3},
+{t:"Quel souvenir t’a fait sentir connecté·e sans mots ?",i:2},
+{t:"Quel moment avec moi t’a fait ralentir le temps ?",i:2},
+{t:"Quel souvenir t’a fait te sentir compris sans explication ?",i:3},
+
+{t:"Quel moment avec moi t’a fait te sentir unique ?",i:2},
+{t:"Quel souvenir t’a marqué par son authenticité ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir proche même à distance ?",i:2},
+{t:"Quel souvenir t’a fait penser à l’avenir ?",i:3},
+{t:"Quel moment avec moi t’a fait sortir de ta zone de confort ?",i:2},
+{t:"Quel souvenir t’a marqué par son imprévu ?",i:1},
+{t:"Quel moment avec moi t’a fait te sentir libre ?",i:2},
+{t:"Quel souvenir t’a fait te dire qu’on pouvait compter l’un sur l’autre ?",i:3},
+{t:"Quel moment avec moi t’a fait te sentir bien sans raison ?",i:1},
+{t:"Quel souvenir t’a marqué par sa douceur ?",i:2},
+
+{t:"Quel moment avec moi t’a fait te sentir en confiance totale ?",i:3},
+{t:"Quel souvenir t’a fait voir le meilleur de moi ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir écouté sans jugement ?",i:3},
+{t:"Quel souvenir t’a fait ressentir quelque chose de nouveau ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir stable ?",i:2},
+{t:"Quel souvenir t’a fait te dire qu’on avançait ensemble ?",i:3},
+{t:"Quel moment avec moi t’a donné envie de rester encore ?",i:2},
+{t:"Quel souvenir t’a marqué par sa sincérité ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir proche émotionnellement ?",i:3},
+{t:"Quel souvenir t’a fait comprendre quelque chose sur nous ?",i:3},
+
+{t:"Quel moment avec moi t’a fait te sentir soutenu·e ?",i:3},
+{t:"Quel souvenir t’a marqué par sa simplicité et son importance ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir aligné·e avec moi ?",i:2},
+{t:"Quel souvenir t’a fait te sentir bien longtemps après ?",i:1},
+{t:"Quel moment avec moi t’a fait te sentir pleinement toi ?",i:3},
+{t:"Quel souvenir t’a marqué sans que tu saches pourquoi ?",i:1},
+{t:"Quel moment avec moi t’a fait te sentir compris profondément ?",i:3},
+{t:"Quel souvenir t’a donné envie de garder ce lien ?",i:3},
+{t:"Quel moment avec moi t’a fait te sentir rassuré·e sur nous ?",i:3},
+{t:"Quel souvenir t’a marqué par son côté inattendu ?",i:1},
+
+{t:"Quel moment avec moi t’a fait te sentir proche sans effort ?",i:2},
+{t:"Quel souvenir t’a fait te dire qu’on se complète bien ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir en harmonie ?",i:2},
+{t:"Quel souvenir t’a marqué par son côté naturel ?",i:1},
+{t:"Quel moment avec moi t’a fait te sentir à ta place ?",i:3},
+{t:"Quel souvenir t’a fait comprendre notre lien ?",i:3},
+{t:"Quel moment avec moi t’a fait te sentir bien dans le présent ?",i:1},
+{t:"Quel souvenir t’a marqué par son équilibre ?",i:2},
+{t:"Quel moment avec moi t’a fait te sentir en paix ?",i:2},
+{t:"Quel souvenir t’a fait te dire que ça comptait vraiment ?",i:3}
+]
   },
   {
     id:'deep',emoji:'🌊',name:'Deep Talk',
     desc:'Pour les vraies conversations',
     color:'#8FA8C4',
     questions:[
-      {t:"C'est quoi ta plus grande crainte par rapport à notre futur à deux ?",i:3},
-      {t:"Qu'est-ce que tu cherches vraiment dans une relation à ce stade de ta vie ?",i:3},
-      {t:"C'est quoi la chose que tu n'oses pas toujours me dire de peur de ma réaction ?",i:3},
-      {t:"Si tu pouvais changer une chose dans notre façon de communiquer, ce serait quoi ?",i:3},
-      {t:"Quel est le domaine de ta vie où tu te sens encore perdu·e ou en construction ?",i:3},
-      {t:"C'est quoi ton rêve que tu gardes un peu pour toi parce qu'il te semble trop grand ?",i:3},
-      {t:"Qu'est-ce qui te manque parfois et que tu n'as pas encore dans ta vie ?",i:3},
-      {t:"C'est quoi la chose dont tu es le plus fier·e dans ton évolution personnelle ?",i:2},
-      {t:"Tu penses que les gens changent vraiment ou qu'ils restent fondamentalement les mêmes ?",i:2},
-      {t:"C'est quoi le moment de ta vie où tu t'es senti·e le plus seul·e ?",i:3},
-      {t:"Qu'est-ce que la liberté représente pour toi dans une relation ?",i:3},
-      {t:"C'est quoi la chose que ton moi d'il y a cinq ans ne comprendrait pas dans ta vie aujourd'hui ?",i:2},
-      {t:"Tu penses qu'on peut aimer quelqu'un sans toujours le comprendre ?",i:2},
-      {t:"C'est quoi ton rapport à la vulnérabilité — tu la montres ou tu la caches ?",i:3},
-      {t:"Quel est le sacrifice le plus difficile que tu aies fait pour quelqu'un ?",i:3},
-      {t:"C'est quoi la chose que tu as longtemps crue vraie sur toi mais qui s'est révélée fausse ?",i:2},
-      {t:"Tu penses qu'on a besoin de se transformer pour grandir ou qu'on peut grandir en restant soi ?",i:2},
-      {t:"C'est quoi la frontière entre être là pour quelqu'un et se perdre soi-même ?",i:3},
-      {t:"Quelle est la relation — familiale ou amicale — qui t'a le plus construit·e ?",i:3},
-      {t:"Si tu pouvais choisir comment les gens se souviennent de toi dans dix ans, ce serait comment ?",i:2},
-    ]
+{t:"Qu’est-ce qui te fait te sentir vraiment vivant·e ces derniers temps ?",i:3},
+{t:"Qu’est-ce que tu évites en ce moment sans vraiment te l’avouer ?",i:3},
+{t:"Qu’est-ce que tu comprends mieux sur toi aujourd’hui qu’avant ?",i:2},
+{t:"Qu’est-ce que tu aimerais changer dans ta façon de penser ?",i:3},
+{t:"Qu’est-ce qui te fatigue émotionnellement sans que ça se voie forcément ?",i:3},
+{t:"Qu’est-ce que tu ressens quand tu es seul·e trop longtemps ?",i:3},
+{t:"Qu’est-ce que tu attends vraiment des gens proches de toi ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir en sécurité intérieurement ?",i:3},
+{t:"Qu’est-ce que tu aimerais comprendre mieux chez les autres ?",i:2},
+{t:"Qu’est-ce que tu trouves difficile à exprimer avec des mots ?",i:3},
+
+{t:"Qu’est-ce qui t’a le plus fait grandir récemment ?",i:3},
+{t:"Qu’est-ce que tu as appris sur toi après une déception ?",i:3},
+{t:"Qu’est-ce que tu fais pour te protéger émotionnellement ?",i:3},
+{t:"Qu’est-ce que tu aimerais que les gens comprennent mieux de toi ?",i:3},
+{t:"Qu’est-ce qui te touche plus que tu ne le montres ?",i:3},
+{t:"Qu’est-ce qui te donne envie de t’améliorer ?",i:2},
+{t:"Qu’est-ce que tu fais quand tu doutes de toi ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir incompris·e ?",i:3},
+{t:"Qu’est-ce que tu cherches encore à construire dans ta vie ?",i:3},
+{t:"Qu’est-ce qui te rassure quand tout est incertain ?",i:3},
+
+{t:"Qu’est-ce que tu redoutes le plus dans une relation ?",i:3},
+{t:"Qu’est-ce que tu as du mal à accepter chez toi ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir vulnérable ?",i:3},
+{t:"Qu’est-ce que tu caches parfois derrière ton comportement ?",i:3},
+{t:"Qu’est-ce qui te rend fier·e de toi mais que tu dis rarement ?",i:2},
+{t:"Qu’est-ce que tu fais quand tu te sens perdu·e ?",i:3},
+{t:"Qu’est-ce que tu aimerais lâcher mais que tu gardes encore ?",i:3},
+{t:"Qu’est-ce qui te donne le plus de sens actuellement ?",i:3},
+{t:"Qu’est-ce que tu as du mal à pardonner ?",i:3},
+{t:"Qu’est-ce que tu aurais besoin d’entendre plus souvent ?",i:3},
+
+{t:"Qu’est-ce qui te fait te sentir vraiment compris·e ?",i:3},
+{t:"Qu’est-ce que tu ressens quand tu es vraiment heureux·se ?",i:2},
+{t:"Qu’est-ce qui te fait peur dans le changement ?",i:3},
+{t:"Qu’est-ce que tu aimerais faire différemment dans ta vie ?",i:3},
+{t:"Qu’est-ce que tu regrettes de ne pas avoir essayé ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir libre ?",i:2},
+{t:"Qu’est-ce que tu ressens quand tu perds le contrôle ?",i:3},
+{t:"Qu’est-ce que tu attends vraiment de toi-même ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir aligné·e ?",i:3},
+{t:"Qu’est-ce que tu veux vraiment protéger dans ta vie ?",i:3},
+
+{t:"Qu’est-ce que tu trouves difficile dans le fait d’aimer quelqu’un ?",i:3},
+{t:"Qu’est-ce que tu as appris de tes relations passées ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir proche de quelqu’un ?",i:2},
+{t:"Qu’est-ce que tu as peur de perdre ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir en paix ?",i:2},
+{t:"Qu’est-ce que tu cherches quand tu te confies ?",i:3},
+{t:"Qu’est-ce que tu ressens quand quelqu’un te comprend vraiment ?",i:3},
+{t:"Qu’est-ce que tu veux éviter de reproduire ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir attaché·e à quelqu’un ?",i:2},
+{t:"Qu’est-ce que tu trouves difficile dans le fait de faire confiance ?",i:3},
+
+{t:"Qu’est-ce qui te fait te sentir rejeté·e ?",i:3},
+{t:"Qu’est-ce que tu fais quand tu te sens dépassé·e ?",i:3},
+{t:"Qu’est-ce que tu aimerais changer dans tes réactions ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir fort·e ?",i:2},
+{t:"Qu’est-ce que tu ressens quand tu es fier·e de toi ?",i:2},
+{t:"Qu’est-ce que tu fais quand tu es blessé·e ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir important·e ?",i:3},
+{t:"Qu’est-ce que tu cherches à éviter dans ta vie ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir stable ?",i:2},
+{t:"Qu’est-ce que tu as du mal à lâcher ?",i:3},
+
+{t:"Qu’est-ce qui te fait te sentir proche de toi-même ?",i:3},
+{t:"Qu’est-ce que tu ressens quand tu es en désaccord avec toi-même ?",i:3},
+{t:"Qu’est-ce que tu voudrais comprendre sur ta façon d’aimer ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir perdu·e ?",i:3},
+{t:"Qu’est-ce que tu cherches vraiment au fond ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir en équilibre ?",i:2},
+{t:"Qu’est-ce que tu ressens quand tu te sens jugé·e ?",i:3},
+{t:"Qu’est-ce que tu voudrais changer dans ta vie intérieure ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir en confiance ?",i:2},
+{t:"Qu’est-ce que tu as appris sur l’amour ?",i:3},
+
+{t:"Qu’est-ce qui te fait te sentir connecté·e aux autres ?",i:2},
+{t:"Qu’est-ce que tu ressens quand tu es incompris·e ?",i:3},
+{t:"Qu’est-ce que tu cherches à éviter dans les relations ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir écouté·e ?",i:2},
+{t:"Qu’est-ce que tu voudrais améliorer chez toi ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir serein·e ?",i:2},
+{t:"Qu’est-ce que tu ressens quand tu es vraiment toi-même ?",i:3},
+{t:"Qu’est-ce que tu aimerais changer dans ta manière d’aimer ?",i:3},
+{t:"Qu’est-ce qui te fait te sentir compris sans parler ?",i:3},
+{t:"Qu’est-ce que tu veux vraiment dans ta vie ?",i:3}
+]
+    
   },
   {
     id:'romance',emoji:'🌹',name:'Romance',
-    desc:'Douceur, tendresse, désir léger',
-    color:'#C4A0A0',
-    questions:[
+  desc:'Douceur, tendresse, désir léger',
+  color:'#C4A0A0',
+  questions:[
       {t:"C'est quoi le geste que je fais qui te fait le plus craquer ?",i:2},
-      {t:"Tu as un fantasme de date parfaite avec moi que tu n'as jamais vraiment dit ?",i:2},
-      {t:"C'est quoi la chose que je fais naturellement et qui te touche chaque fois ?",i:2},
-      {t:"Si tu pouvais choisir un mot pour décrire ce que tu ressens avec moi, ce serait lequel ?",i:2},
-      {t:"C'est quoi le moment où tu te sens le plus aimé·e par moi ?",i:3},
-      {t:"Tu as une façon préférée de recevoir de l'affection ?",i:2},
-      {t:"C'est quoi le truc que je pourrais faire spontanément qui te rendrait vraiment heureux·se ?",i:2},
-      {t:"Si on avait une nuit parfaite ensemble sans contrainte, elle ressemblerait à quoi ?",i:2},
-      {t:"C'est quoi le détail physique de moi que tu remarques le plus ?",i:2},
       {t:"Tu me dirais quelque chose que tu penses souvent mais que tu ne dis pas assez ?",i:3},
-      {t:"C'est quoi l'ambiance qui te met le plus dans un état d'esprit tendre ?",i:2},
-      {t:"Quel est le moment où tu as eu le plus envie de m'embrasser depuis qu'on est ensemble ?",i:2},
-      {t:"C'est quoi la chose chez moi qui te rassure ?",i:3},
-      {t:"Tu as une façon préférée qu'on finisse nos soirées ensemble ?",i:2},
       {t:"C'est quoi le compliment que tu m'as fait et auquel tu pensais vraiment à fond ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand tu penses à nous sans raison particulière ?",i:2},
+  {t:"Quel moment avec moi t'a fait te sentir vraiment à ta place ?",i:2},
+  {t:"Qu'est-ce qui te fait te sentir proche de moi sans qu'on parle ?",i:2},
+  {t:"Quel est le petit geste de moi que tu remarques toujours ?",i:1},
+  {t:"Quand est-ce que tu te sens le plus en paix avec moi ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans la façon dont on se comprend ?",i:2},
+  {t:"Quel moment simple avec moi te rend heureux·se sans effort ?",i:1},
+  {t:"Qu'est-ce que notre relation t'apporte que tu ne trouves pas ailleurs ?",i:3},
+  {t:"Quand tu penses à moi, c'est quoi la première sensation qui vient ?",i:2},
+  {t:"Qu'est-ce que tu trouves beau dans notre lien ?",i:2},
+
+  {t:"Quel moment avec moi t'a fait te sentir aimé·e sans ambiguïté ?",i:3},
+  {t:"Qu'est-ce que tu apprécies dans ma manière d'être avec toi ?",i:2},
+  {t:"Quel détail chez moi te fait sourire à chaque fois ?",i:1},
+  {t:"Qu'est-ce que tu ressens quand je te regarde longtemps ?",i:2},
+  {t:"Quel souvenir de nous te fait te sentir apaisé·e ?",i:2},
+  {t:"Qu'est-ce que tu trouves rassurant dans notre relation ?",i:3},
+  {t:"Quand est-ce que tu te sens le plus toi-même avec moi ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans nos moments silencieux ?",i:2},
+  {t:"Quel moment avec moi t'a marqué sans que ce soit spectaculaire ?",i:2},
+  {t:"Qu'est-ce qui rend notre relation différente pour toi ?",i:3},
+
+  {t:"Qu'est-ce que tu ressens quand on se retrouve après s'être manqué ?",i:2},
+  {t:"Quel moment te donne envie de te rapprocher encore plus de moi ?",i:2},
+  {t:"Qu'est-ce que tu trouves précieux dans notre quotidien ?",i:2},
+  {t:"Quand est-ce que tu te sens le plus connecté·e à moi ?",i:3},
+  {t:"Qu'est-ce qui te fait te dire que nous deux, ça compte vraiment ?",i:3},
+  {t:"Quel moment avec moi te fait oublier le reste ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand je te surprends ?",i:2},
+  {t:"Quel moment te fait te sentir en sécurité avec moi ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans la façon dont on passe du temps ensemble ?",i:1},
+  {t:"Qu'est-ce qui te donne envie de construire avec moi ?",i:3},
+
+  {t:"Quel moment avec moi te semble suspendu dans le temps ?",i:2},
+  {t:"Qu'est-ce que tu trouves doux dans notre relation ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on se comprend sans parler ?",i:3},
+  {t:"Quel est le moment où tu te sens le plus proche de moi émotionnellement ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans la manière dont je te fais sentir ?",i:3},
+  {t:"Quel moment banal avec moi te paraît spécial ?",i:2},
+  {t:"Qu'est-ce qui te fait te sentir bien juste en étant avec moi ?",i:2},
+  {t:"Quel est le moment où tu te dis qu'on est bien ensemble ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand je te manque ?",i:2},
+  {t:"Quel moment avec moi te donne envie de rester encore ?",i:2},
+
+  {t:"Qu'est-ce que tu trouves sincère dans notre relation ?",i:3},
+  {t:"Quel moment te fait te sentir profondément attaché·e à moi ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans notre façon d'être proches ?",i:2},
+  {t:"Quand est-ce que tu ressens le plus d'affection pour moi ?",i:2},
+  {t:"Quel moment te fait te dire que tu tiens à moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on se parle longtemps ?",i:2},
+  {t:"Quel moment te fait te sentir aligné·e avec moi ?",i:3},
+  {t:"Qu'est-ce que tu trouves naturel entre nous ?",i:2},
+  {t:"Quel moment avec moi te semble évident ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on partage un moment simple ?",i:1},
+
+  {t:"Quel moment te donne envie de prendre soin de moi ?",i:2},
+  {t:"Qu'est-ce que tu trouves touchant dans notre relation ?",i:2},
+  {t:"Quel moment te fait te sentir proche même sans contact ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on est juste tous les deux ?",i:2},
+  {t:"Quel moment te fait te dire qu'on se comprend vraiment ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans notre manière d'exister ensemble ?",i:3},
+  {t:"Quel moment avec moi te fait te sentir bien intérieurement ?",i:2},
+  {t:"Qu'est-ce que tu trouves unique entre nous ?",i:3},
+  {t:"Quel moment te donne envie de ralentir avec moi ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on partage un regard ?",i:2},
+
+  {t:"Quel moment te fait te sentir choisi·e ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans la façon dont je suis avec toi ?",i:2},
+  {t:"Quel moment te fait te sentir important·e pour moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand je te fais confiance ?",i:3},
+  {t:"Quel moment te fait te sentir en harmonie avec moi ?",i:3},
+  {t:"Qu'est-ce que tu trouves stable dans notre relation ?",i:2},
+  {t:"Quel moment te donne envie d'être encore plus proche ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on partage quelque chose d'intime ?",i:3},
+  {t:"Quel moment te fait te dire qu'on forme un vrai duo ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans notre équilibre ?",i:3},
+
+  {t:"Quel moment te fait te sentir profondément lié·e à moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on se soutient ?",i:3},
+  {t:"Quel moment te fait te sentir bien émotionnellement ?",i:2},
+  {t:"Qu'est-ce que tu trouves fort dans notre relation ?",i:3},
+  {t:"Quel moment te donne envie de continuer avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on se comprend vraiment ?",i:3},
+  {t:"Quel moment te fait te sentir proche sans effort ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans notre façon d'être ensemble ?",i:2},
+  {t:"Quel moment te fait te sentir apaisé·e avec moi ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand tu penses à nous deux ?",i:2}
     ]
-  },
-  {
+},
+{
     id:'hot',emoji:'🕯️',name:'Intime',
-    desc:'Élégant, sensuel, sans vulgarité',
-    color:'#B08080',
-    questions:[
-      {t:"C'est quoi le truc que je fais qui allume ta curiosité de la façon la plus inattendue ?",i:3},
-      {t:"Tu as un fantasme qu'on n'a jamais vraiment exploré ensemble ?",i:3},
-      {t:"C'est quoi le moment où tu as eu le plus envie de me toucher depuis le début ?",i:3},
-      {t:"Il y a une situation ou un contexte qui te rend naturellement plus attiré·e ?",i:3},
-      {t:"C'est quoi la chose que j'ai dite ou murmuré qui reste dans ta mémoire ?",i:3},
-      {t:"Tu me dirais quelque chose que tu n'oses pas initier mais que tu aimerais qu'on essaie ?",i:3},
-      {t:"C'est quoi ton rapport à la lenteur dans l'intimité — tu l'apprécies ou tu préfères l'intensité ?",i:3},
-      {t:"Si tu pouvais choisir l'ambiance parfaite pour une nuit avec moi, elle ressemblerait à quoi ?",i:3},
-      {t:"C'est quoi la frontière entre ce qui est intime et ce qui devient sacré pour toi ?",i:3},
-      {t:"Tu as une façon préférée d'être touché·e ou tenu·e que tu n'as jamais formulée ?",i:3},
-      {t:"C'est quoi le truc que tu ne fais qu'avec moi et nulle part ailleurs ?",i:3},
-      {t:"Si tu pouvais designer notre prochaine soirée intime de A à Z, elle commencerait comment ?",i:3},
-    ]
-  },
-  {
+  desc:'Élégant, sensuel, sans vulgarité',
+  color:'#B08080',
+  questions:[
+  {t:"Qu'est-ce qui te fait te sentir le plus en confiance avec moi ?",i:3},
+  {t:"Quel moment avec moi t'a fait baisser complètement ta garde ?",i:3},
+  {t:"Qu'est-ce qui te fait te sentir en sécurité émotionnellement avec moi ?",i:3},
+  {t:"Quand est-ce que tu te sens le plus vulnérable avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand tu te laisses vraiment aller avec moi ?",i:3},
+  {t:"Quel moment t'a fait sentir que tu pouvais être totalement toi-même ?",i:3},
+  {t:"Qu'est-ce que tu n'as pas besoin de cacher quand tu es avec moi ?",i:3},
+  {t:"Quel moment t'a donné envie de me faire confiance profondément ?",i:3},
+  {t:"Qu'est-ce qui te fait te sentir compris·e sans devoir expliquer ?",i:3},
+  {t:"Quand est-ce que tu te sens le plus connecté·e à moi intérieurement ?",i:3},
+
+  {t:"Qu'est-ce qui te touche le plus dans la manière dont je suis avec toi ?",i:2},
+  {t:"Quel moment avec moi t'a fait te sentir réellement écouté·e ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand je suis attentif·ve à toi ?",i:2},
+  {t:"Quel moment te fait te sentir proche de moi sans contact ?",i:2},
+  {t:"Qu'est-ce qui te fait te sentir important·e pour moi ?",i:3},
+  {t:"Quand est-ce que tu ressens le plus de douceur entre nous ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans notre façon d'être proches ?",i:2},
+  {t:"Quel moment t'a fait te sentir accueilli·e tel·le que tu es ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on partage un silence ?",i:2},
+  {t:"Quel moment te fait te sentir profondément respecté·e ?",i:3},
+
+  {t:"Qu'est-ce qui te rassure dans notre lien ?",i:3},
+  {t:"Quel moment t'a fait sentir qu'on pouvait aller plus loin ensemble ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand je te comprends sans parler ?",i:3},
+  {t:"Quel moment t'a donné envie de t'ouvrir davantage ?",i:3},
+  {t:"Qu'est-ce que tu trouves fort dans notre connexion ?",i:3},
+  {t:"Quand est-ce que tu ressens le plus d'intensité entre nous ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand tu me regardes longtemps ?",i:2},
+  {t:"Quel moment t'a fait te sentir vraiment proche de moi ?",i:3},
+  {t:"Qu'est-ce que tu trouves sincère entre nous ?",i:3},
+  {t:"Quel moment te donne envie de rester encore avec moi ?",i:2},
+
+  {t:"Qu'est-ce que tu ressens quand tu te sens en confiance avec moi ?",i:3},
+  {t:"Quel moment te fait te sentir profondément apaisé·e ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans notre proximité émotionnelle ?",i:3},
+  {t:"Quel moment te fait te sentir aligné·e avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on est seuls tous les deux ?",i:2},
+  {t:"Quel moment te donne envie de te rapprocher encore ?",i:2},
+  {t:"Qu'est-ce que tu trouves doux dans notre lien ?",i:2},
+  {t:"Quel moment te fait te sentir en harmonie avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand je suis proche de toi ?",i:2},
+  {t:"Quel moment te fait te sentir en paix avec nous ?",i:2},
+
+  {t:"Qu'est-ce qui te fait te sentir profondément connecté·e à moi ?",i:3},
+  {t:"Quel moment te donne envie d'être encore plus sincère ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand tu me fais confiance ?",i:3},
+  {t:"Quel moment te fait te sentir accepté·e entièrement ?",i:3},
+  {t:"Qu'est-ce que tu trouves beau dans notre intimité ?",i:3},
+  {t:"Quel moment te fait te sentir en sécurité avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on partage quelque chose de personnel ?",i:3},
+  {t:"Quel moment te fait te sentir proche sans effort ?",i:2},
+  {t:"Qu'est-ce que tu aimes dans la façon dont on se rapproche ?",i:2},
+  {t:"Quel moment te fait te sentir important·e pour moi ?",i:3},
+
+  {t:"Qu'est-ce que tu ressens quand on se comprend profondément ?",i:3},
+  {t:"Quel moment te fait te sentir lié·e à moi ?",i:3},
+  {t:"Qu'est-ce que tu trouves unique dans notre connexion ?",i:3},
+  {t:"Quel moment te fait te sentir bien intérieurement ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on se rapproche émotionnellement ?",i:3},
+  {t:"Quel moment te fait te sentir en confiance totale ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans notre proximité ?",i:2},
+  {t:"Quel moment te fait te sentir connecté·e sans mots ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on partage un moment fort ?",i:3},
+  {t:"Quel moment te fait te sentir serein·e avec moi ?",i:2},
+
+  {t:"Qu'est-ce qui te fait te sentir en sécurité avec moi ?",i:3},
+  {t:"Quel moment te donne envie de t'ouvrir davantage ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand tu es proche de moi ?",i:2},
+  {t:"Quel moment te fait te sentir compris·e profondément ?",i:3},
+  {t:"Qu'est-ce que tu trouves important dans notre intimité ?",i:3},
+  {t:"Quel moment te fait te sentir aligné·e émotionnellement ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on se rapproche ?",i:2},
+  {t:"Quel moment te fait te sentir connecté·e intensément ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans notre lien profond ?",i:3},
+  {t:"Quel moment te fait te sentir bien avec moi ?",i:2},
+
+  {t:"Qu'est-ce que tu ressens quand tu penses à notre connexion ?",i:3},
+  {t:"Quel moment te fait te sentir proche de moi sincèrement ?",i:3},
+  {t:"Qu'est-ce que tu trouves rassurant entre nous ?",i:3},
+  {t:"Quel moment te fait te sentir apaisé·e avec moi ?",i:2},
+  {t:"Qu'est-ce que tu ressens quand on partage un moment intime ?",i:3},
+  {t:"Quel moment te fait te sentir en sécurité émotionnelle ?",i:3},
+  {t:"Qu'est-ce que tu aimes dans notre profondeur ?",i:3},
+  {t:"Quel moment te fait te sentir en lien avec moi ?",i:3},
+  {t:"Qu'est-ce que tu ressens quand on est vraiment proches ?",i:2},
+  {t:"Quel moment te fait te sentir connecté·e sincèrement ?",i:3}
+  [
+  {t:"Si je rentre dans la salle de bain alors que tu es déjà là, tu fais quoi en premier ?",i:3},
+  {t:"Tu réagirais comment si je te regarde sans rien dire pendant plusieurs secondes ?",i:3},
+  {t:"Est-ce que tu serais à l’aise si je me rapproche sans prévenir ?",i:3},
+  {t:"Tu préfères quand je parle doucement ou quand je me tais près de toi ?",i:3},
+  {t:"Si je te touche juste l’épaule sans raison, tu réagis comment ?",i:3},
+
+  {t:"Tu détournes vite le regard ou tu tiens le mien ?",i:3},
+  {t:"Tu serais gêné·e ou curieux·se si je me rapproche trop près ?",i:3},
+  {t:"C’est quoi ton premier réflexe quand je suis trop proche de toi ?",i:3},
+  {t:"Tu préfères que je te surprenne ou que je te laisse deviner ?",i:3},
+  {t:"Si je chuchote ton prénom près de toi, ça te fait quoi ?",i:3},
+
+  {t:"Tu serais capable de rester calme si je te fixe sans sourire ?",i:3},
+  {t:"Tu préfères le silence entre nous ou les petites provocations ?",i:3},
+  {t:"C’est quoi la distance parfaite entre toi et moi ?",i:3},
+  {t:"Tu réagis comment si je reste trop longtemps près de toi sans bouger ?",i:3},
+  {t:"Tu préfères que je sois imprévisible ou rassurant ?",i:3},
+
+  {t:"C’est quoi le plus perturbant : le silence ou le regard ?",i:3},
+  {t:"Tu fais quoi si je m’assois trop près sans rien dire ?",i:3},
+  {t:"Tu préfères quand je suis doux ou quand je joue avec ta patience ?",i:3},
+  {t:"C’est quoi ton niveau de tolérance à la provocation légère ?",i:3},
+  {t:"Tu serais à l’aise si je m’approche sans prévenir dans un moment calme ?",i:3},
+
+  {t:"Tu fais quoi si je te parle très doucement près de ton oreille ?",i:3},
+  {t:"Tu serais capable de tenir mon regard sans rire ?",i:3},
+  {t:"C’est quoi ton point faible quand quelqu’un est trop proche ?",i:3},
+  {t:"Tu préfères contrôler la situation ou te laisser surprendre ?",i:3},
+  {t:"Tu réagis comment si je te bloque légèrement le passage en rigolant ?",i:3},
+
+  {t:"Tu préfères comprendre ce que je pense ou le deviner ?",i:3},
+  {t:"C’est quoi le plus déroutant chez moi quand je suis trop calme ?",i:3},
+  {t:"Tu fais quoi si je reste silencieux mais très proche de toi ?",i:3},
+  {t:"Tu préfères que je sois direct ou mystérieux ?",i:3},
+  {t:"Tu fais quoi si je m’assois juste un peu trop près sans rien dire ?",i:3},
+
+  {t:"Tu préfères que je te laisse tranquille ou que je sois trop présent ?",i:3},
+  {t:"C’est quoi le plus troublant : mon silence ou mon regard ?",i:3},
+  {t:"Tu fais quoi si je te parle très doucement sans te quitter des yeux ?",i:3},
+  {t:"Tu préfères les situations contrôlées ou les imprévus entre nous ?",i:3},
+  {t:"C’est quoi ton niveau de tolérance à la proximité inattendue ?",i:3},
+
+  {t:"Tu réagis comment si je reste immobile juste à côté de toi ?",i:3},
+  {t:"Tu préfères que je sois transparent ou difficile à lire ?",i:3},
+  {t:"Tu fais quoi si je te surprends juste en restant silencieux ?",i:3},
+  {t:"Tu préfères comprendre ou ressentir sans comprendre ?",i:3},
+  {t:"C’est quoi le moment le plus déroutant avec moi ?",i:3},
+
+  {t:"Tu fais quoi si je te regarde comme si je savais quelque chose ?",i:3},
+  {t:"Tu serais capable de rester calme si je joue avec ton attention sans rien dire ?",i:3},
+  {t:"Tu préfères quand je contrôle la situation ou quand je la laisse floue ?",i:3},
+
+  {t:"Tu réagis comment si je fais semblant de ne rien vouloir dire ?",i:3},
+  {t:"Tu préfères les moments prévisibles ou les instants étranges entre nous ?",i:3},
+  {t:"C’est quoi la chose la plus simple qui te déstabilise chez quelqu’un ?",i:3},
+
+  {t:"Tu fais quoi si je m’assois juste un peu trop près ?",i:3},
+  {t:"Tu préfères que je sois doux ou imprévisible ?",i:3},
+  {t:"Tu réagis comment si je change de ton sans prévenir ?",i:3},
+
+  {t:"Tu préfères comprendre ou juste suivre sans savoir ?",i:3},
+  {t:"Tu fais quoi si je reste trop longtemps dans ton espace sans bouger ?",i:3},
+  {t:"Tu serais capable de rester impassible si je teste ta réaction ?",i:3},
+
+  {t:"Tu préfères que je sois stable ou imprévisible émotionnellement ?",i:3},
+  {t:"Tu fais quoi si je me rapproche juste pour rien dire ?",i:3},
+  {t:"C’est quoi ton réflexe quand tu sens que je te teste ?",i:3},
+
+  {t:"Tu préfères répondre ou observer ?",i:3},
+  {t:"Tu réagis comment si je change soudainement d’attitude ?",i:3},
+  {t:"C’est quoi le plus perturbant : le silence ou la proximité ?",i:3},
+
+  {t:"Tu fais quoi si je reste là sans rien dire mais très proche ?",i:3},
+  {t:"Tu préfères que je sois prévisible ou totalement imprévisible ?",i:3}
+  ]
+]
+},
+
+ {
     id:'random',emoji:'🎲',name:'Aléatoire',
     desc:'Laisse le hasard décider',
     color:'#A0A8C0',
-    questions:[] // rempli dynamiquement
+    questions:[]
   }
 ];
+
 
 /* ═══════════════════════════════════
    STATE
@@ -1020,11 +2321,15 @@ let state = {
   sessionCount:5,
   sessionIndex:0,
   sessionQueue:[],
-  favorites:JSON.parse(localStorage.getItem('lueur_favs')||'[]'),
-  seen:JSON.parse(localStorage.getItem('lueur_seen')||'{}'),
-  settings:JSON.parse(localStorage.getItem('lueur_settings')||'{"hot":true,"turns":false,"name1":"","name2":""}'),
-  streak:parseInt(localStorage.getItem('lueur_streak')||'0'),
+  favorites:[],
+  seen:{},
+  name1:'Vous',
+  name2:'Partenaire',
+  streak:0,
+  hot:true,
+  turns:false,
   isFav:false,
+  userId:null,
 };
 
 let deferredPrompt = null;
@@ -1033,12 +2338,7 @@ let deferredPrompt = null;
    INIT
 ═══════════════════════════════════ */
 window.addEventListener('load',()=>{
-  updateGreeting();
-  updateStreak();
-  renderHomeGrid();
-  renderModesList();
-  renderFavs();
-  applySettings();
+  initFirebase();
 
   // PWA install
   window.addEventListener('beforeinstallprompt',(e)=>{
@@ -1059,6 +2359,20 @@ function updateGreeting(){
 function updateStreak(){
   const s=state.streak;
   document.getElementById('streak-count').textContent=s===0?'Aucune encore':s===1?'1 session':''+s+' sessions';
+}
+
+async function onUserLoggedIn(){
+  if(currentUser) {
+    state.userId = currentUser.uid;
+    state.name1 = localStorage.getItem('lueur_name1') || 'Vous';
+    state.name2 = localStorage.getItem('lueur_name2') || 'Partenaire';
+    updateGreeting();
+    updateStreak();
+    renderHomeGrid();
+    renderModesList();
+    renderFavs();
+    applySettings();
+  }
 }
 
 /* ═══════════════════════════════════
@@ -1084,7 +2398,7 @@ function goBack(){
 ═══════════════════════════════════ */
 function renderHomeGrid(){
   const grid=document.getElementById('home-modes-grid');
-  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  const shown=MODES.filter(m=>m.id!=='hot'||state.hot);
   grid.innerHTML=shown.slice(0,6).map((m,i)=>`
     <div class="mode-card" onclick="startFromHome(${MODES.indexOf(m)})" role="button" tabindex="0"
       aria-label="Jouer ${m.name}"
@@ -1104,7 +2418,7 @@ function startFromHome(idx){
 ═══════════════════════════════════ */
 function renderModesList(){
   const list=document.getElementById('modes-list');
-  const shown=MODES.filter(m=>m.id!=='hot'||state.settings.hot);
+  const shown=MODES.filter(m=>m.id!=='hot'||state.hot);
   list.innerHTML=shown.map(m=>`
     <div class="mode-item" onclick="startSession(${MODES.indexOf(m)},state.sessionCount)"
       role="button" tabindex="0" aria-label="Jouer ${m.name} — ${m.desc}"
@@ -1133,7 +2447,7 @@ function selectSession(btn){
 function buildQueue(modeIdx,count){
   let pool;
   if(MODES[modeIdx].id==='random'){
-    pool=MODES.slice(0,-1).filter(m=>m.id!=='hot'||state.settings.hot).flatMap(m=>m.questions.map(q=>({...q,_modeIdx:MODES.indexOf(m)})));
+    pool=MODES.slice(0,-1).filter(m=>m.id!=='hot'||state.hot).flatMap(m=>m.questions.map(q=>({...q,_modeIdx:MODES.indexOf(m)})));
   } else {
     pool=MODES[modeIdx].questions.map(q=>({...q,_modeIdx:modeIdx}));
   }
@@ -1211,12 +2525,31 @@ function renderQuestion(){
   // limite à 50 pour éviter blocage total
   if(state.seen[q._modeIdx].length>50)state.seen[q._modeIdx].shift();
   localStorage.setItem('lueur_seen',JSON.stringify(state.seen));
+  
+  updatePrevButton();
 }
 
 function nextQuestion(){
   if(state.sessionIndex>=state.sessionQueue.length-1){endSession();return;}
   state.sessionIndex++;
   renderQuestion();
+  updatePrevButton();
+}
+
+function previousQuestion(){
+  if(state.sessionIndex<=0)return;
+  state.sessionIndex--;
+  renderQuestion();
+  updatePrevButton();
+}
+
+function updatePrevButton(){
+  const prevBtn=document.getElementById('prev-btn');
+  if(state.sessionIndex>0){
+    prevBtn.style.display='flex';
+  } else {
+    prevBtn.style.display='none';
+  }
 }
 
 function skipQuestion(){
@@ -1237,7 +2570,7 @@ function shuffleMode(){
   renderQuestion();
 }
 
-function toggleFav(){
+async function toggleFav(){
   const q=state.sessionQueue[state.sessionIndex];
   if(!q)return;
   const idx=state.favorites.findIndex(f=>f.t===q.t);
@@ -1249,7 +2582,7 @@ function toggleFav(){
   const favBtn=document.getElementById('fav-btn');
   favBtn.classList.toggle('active',state.isFav);
   favBtn.setAttribute('aria-pressed',state.isFav?'true':'false');
-  localStorage.setItem('lueur_favs',JSON.stringify(state.favorites));
+  await saveUserData();
 }
 
 /* ═══════════════════════════════════
@@ -1266,7 +2599,7 @@ const endMessages=[
 function endSession(){
   // streak
   state.streak++;
-  localStorage.setItem('lueur_streak',state.streak);
+  saveUserData();
   updateStreak();
 
   const msg=endMessages[Math.floor(Math.random()*endMessages.length)];
@@ -1350,18 +2683,18 @@ function removeFav(idx){
    SETTINGS
 ═══════════════════════════════════ */
 function applySettings(){
-  document.getElementById('name1').value=state.settings.name1||'';
-  document.getElementById('name2').value=state.settings.name2||'';
-  document.getElementById('toggle-hot').classList.toggle('on',state.settings.hot);
-  document.getElementById('toggle-hot').setAttribute('aria-checked',state.settings.hot);
-  document.getElementById('toggle-turns').classList.toggle('on',state.settings.turns);
-  document.getElementById('toggle-turns').setAttribute('aria-checked',state.settings.turns);
+  document.getElementById('name1').value=state.name1||'';
+  document.getElementById('name2').value=state.name2||'';
+  document.getElementById('toggle-hot').classList.toggle('on',state.hot);
+  document.getElementById('toggle-hot').setAttribute('aria-checked',state.hot);
+  document.getElementById('toggle-turns').classList.toggle('on',state.turns);
+  document.getElementById('toggle-turns').setAttribute('aria-checked',state.turns);
 
   document.getElementById('name1').addEventListener('input',function(){
-    state.settings.name1=this.value;saveSettings();
+    state.name1=this.value;saveSettings();
   });
   document.getElementById('name2').addEventListener('input',function(){
-    state.settings.name2=this.value;saveSettings();
+    state.name2=this.value;saveSettings();
   });
 }
 
@@ -1369,19 +2702,21 @@ function toggleSetting(el,key){
   const on=!el.classList.contains('on');
   el.classList.toggle('on',on);
   el.setAttribute('aria-checked',on);
-  state.settings[key]=on;
+  state[key]=on;
   saveSettings();
   renderHomeGrid();renderModesList();
 }
 
-function saveSettings(){
-  localStorage.setItem('lueur_settings',JSON.stringify(state.settings));
+async function saveSettings(){
+  localStorage.setItem('lueur_name1',state.name1);
+  localStorage.setItem('lueur_name2',state.name2);
+  await saveUserData();
 }
 
-function clearHistory(){
+async function clearHistory(){
   if(confirm('Réinitialiser les questions déjà vues ?')){
     state.seen={};
-    localStorage.setItem('lueur_seen','{}');
+    await saveUserData();
   }
 }
 
